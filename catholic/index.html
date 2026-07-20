@@ -3,44 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>가톨릭대학교 보유기술 SMK 랜딩페이지</title>
-    <meta name="description" content="가톨릭대학교 반도체·이차전지·수소에너지 분야 보유기술 3건을 한 화면에서 검토하는 기술사업화 랜딩페이지">
+    <title>가톨릭대학교 IP거래 기술목록</title>
+    <meta name="description" content="가톨릭대학교 보유 SMK 기술 3건 목록">
     <style>
       :root {
-        --ink: #0a0a0a;
-        --charcoal: #1c1c1e;
-        --slate: #3a3a3c;
-        --steel: #5a5a5c;
-        --muted: #888888;
-        --canvas: #ffffff;
-        --surface: #f7f7f7;
-        --surface-soft: #fafafa;
-        --hairline: #e5e5e5;
-        --hairline-soft: #ededed;
-        --green: #00b48a;
-        --green-bright: #00d4a4;
-        --blue: #3772cf;
-        --orange: #f55a3c;
-        --radius: 8px;
-        --shadow: 0 18px 55px rgba(10, 10, 10, 0.08);
+        --ink: #111111;
+        --text: #2f2f2f;
+        --muted: #6f6f6f;
+        --line: #dddddd;
+        --soft: #f6f6f6;
+        --white: #ffffff;
+        --green: #00a77f;
       }
 
       * {
         box-sizing: border-box;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
-
       body {
         margin: 0;
+        background: var(--white);
         color: var(--ink);
-        background:
-          radial-gradient(circle at 8% 0%, rgba(0, 212, 164, 0.13), transparent 28rem),
-          radial-gradient(circle at 90% 8%, rgba(55, 114, 207, 0.11), transparent 30rem),
-          linear-gradient(180deg, #ffffff 0%, #fbfbfb 42%, #f7f7f7 100%);
-        font-family: Inter, Pretendard, "Noto Sans KR", "Segoe UI", Arial, sans-serif;
+        font-family: Pretendard, "Noto Sans KR", "Segoe UI", Arial, sans-serif;
         letter-spacing: 0;
       }
 
@@ -49,919 +33,259 @@
         text-decoration: none;
       }
 
-      img {
-        display: block;
-        max-width: 100%;
-      }
-
-      .site-shell {
-        min-height: 100vh;
-      }
-
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        border-bottom: 1px solid rgba(229, 229, 229, 0.88);
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(16px);
-      }
-
-      .topbar-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: min(1180px, calc(100% - 40px));
+      .wrap {
+        width: min(1080px, calc(100% - 40px));
         margin: 0 auto;
-        padding: 14px 0;
-        gap: 20px;
       }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
-        font-weight: 700;
+      header {
+        padding: 48px 0 34px;
+        border-bottom: 1px solid var(--line);
       }
 
-      .brand-mark {
-        display: grid;
-        flex: 0 0 34px;
-        width: 34px;
-        height: 34px;
-        place-items: center;
-        border-radius: 8px;
-        color: #ffffff;
-        background: var(--ink);
-        font-size: 13px;
-      }
-
-      .brand-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 8px;
-        color: var(--steel);
+      .label {
+        margin: 0 0 14px;
+        color: var(--green);
         font-size: 14px;
-        font-weight: 600;
-      }
-
-      .nav-links a {
-        padding: 8px 10px;
-        border-radius: 8px;
-      }
-
-      .nav-links a:hover,
-      .nav-links a:focus-visible {
-        color: var(--ink);
-        background: var(--surface);
-        outline: none;
-      }
-
-      .section {
-        width: min(1180px, calc(100% - 40px));
-        margin: 0 auto;
-      }
-
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-        gap: 44px;
-        align-items: center;
-        min-height: calc(100vh - 84px);
-        padding: 72px 0 56px;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin: 0 0 18px;
-        padding: 7px 12px;
-        border: 1px solid var(--hairline);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.74);
-        color: var(--blue);
-        font-size: 12px;
         font-weight: 800;
-      }
-
-      .eyebrow::before {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--green-bright);
-        content: "";
       }
 
       h1 {
-        max-width: 780px;
         margin: 0;
-        font-size: clamp(42px, 5vw, 62px);
-        font-weight: 760;
-        line-height: 1.08;
-        letter-spacing: 0;
-      }
-
-      .title-line {
-        display: block;
-      }
-
-      .title-line strong {
-        color: var(--green);
-        font: inherit;
-      }
-
-      .hero-copy {
-        max-width: 680px;
-        margin: 22px 0 0;
-        color: var(--slate);
-        font-size: 18px;
-        line-height: 1.58;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 32px;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 42px;
-        padding: 10px 18px;
-        border: 1px solid var(--hairline);
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 700;
-      }
-
-      .button.primary {
-        border-color: var(--ink);
-        color: #ffffff;
-        background: var(--ink);
-      }
-
-      .button.secondary {
-        color: var(--ink);
-        background: #ffffff;
-      }
-
-      .hero-panel {
-        overflow: hidden;
-        border: 1px solid var(--hairline);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: var(--shadow);
-      }
-
-      .panel-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 18px 18px 12px;
-        border-bottom: 1px solid var(--hairline-soft);
-      }
-
-      .panel-top strong {
-        font-size: 14px;
-      }
-
-      .status-pill {
-        padding: 5px 9px;
-        border-radius: 999px;
-        color: #006a52;
-        background: rgba(0, 212, 164, 0.12);
-        font-size: 12px;
-        font-weight: 800;
-      }
-
-      .hero-tech-list {
-        display: grid;
-        gap: 0;
-      }
-
-      .hero-tech-row {
-        display: grid;
-        grid-template-columns: 54px 1fr auto;
-        align-items: center;
-        gap: 14px;
-        padding: 16px 18px;
-        border-bottom: 1px solid var(--hairline-soft);
-      }
-
-      .hero-tech-row:last-child {
-        border-bottom: 0;
-      }
-
-      .tech-number {
-        display: grid;
-        width: 42px;
-        height: 42px;
-        place-items: center;
-        border-radius: 8px;
-        color: #ffffff;
-        background: var(--charcoal);
-        font-weight: 800;
-      }
-
-      .hero-tech-row h2 {
-        margin: 0;
-        font-size: 16px;
-        line-height: 1.38;
-      }
-
-      .hero-tech-row p {
-        margin: 4px 0 0;
-        color: var(--steel);
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      .metric {
-        min-width: 74px;
-        text-align: right;
-        color: var(--green);
-        font-size: 13px;
-        font-weight: 800;
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        border-top: 1px solid var(--hairline);
-        background: var(--hairline);
-      }
-
-      .stat {
-        padding: 18px;
-        background: #ffffff;
-      }
-
-      .stat b {
-        display: block;
-        font-size: 28px;
-        line-height: 1;
-      }
-
-      .stat span {
-        display: block;
-        margin-top: 8px;
-        color: var(--steel);
-        font-size: 13px;
-        line-height: 1.4;
-      }
-
-      .section-heading {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: end;
-        gap: 20px;
-        padding: 76px 0 24px;
-      }
-
-      .section-heading h2 {
-        margin: 0;
-        font-size: clamp(30px, 4vw, 48px);
+        font-size: clamp(34px, 5vw, 58px);
         line-height: 1.12;
-        letter-spacing: 0;
-      }
-
-      .section-heading p {
-        max-width: 540px;
-        margin: 0;
-        color: var(--steel);
-        font-size: 15px;
-        line-height: 1.6;
-      }
-
-      .tech-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .tech-card {
-        display: flex;
-        min-height: 100%;
-        flex-direction: column;
-        overflow: hidden;
-        border: 1px solid var(--hairline);
-        border-radius: 8px;
-        background: #ffffff;
-        box-shadow: 0 12px 32px rgba(10, 10, 10, 0.05);
-      }
-
-      .tech-card-media {
-        display: grid;
-        min-height: 218px;
-        place-items: center;
-        border-bottom: 1px solid var(--hairline-soft);
-        background:
-          linear-gradient(180deg, rgba(250, 250, 250, 0.8), rgba(247, 247, 247, 0.96)),
-          #ffffff;
-      }
-
-      .tech-card-media img {
-        width: 100%;
-        height: 218px;
-        object-fit: contain;
-        padding: 18px;
-      }
-
-      .tech-card-body {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding: 20px;
-      }
-
-      .tag-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 14px;
-      }
-
-      .tag {
-        padding: 5px 8px;
-        border-radius: 999px;
-        background: var(--surface);
-        color: var(--steel);
-        font-size: 12px;
-        font-weight: 700;
-      }
-
-      .tag.green {
-        color: #006a52;
-        background: rgba(0, 212, 164, 0.12);
-      }
-
-      .tag.blue {
-        color: #255aab;
-        background: rgba(55, 114, 207, 0.1);
-      }
-
-      .tag.orange {
-        color: #b23a21;
-        background: rgba(245, 90, 60, 0.1);
-      }
-
-      .tech-card h3 {
-        margin: 0;
-        font-size: 22px;
-        line-height: 1.28;
-      }
-
-      .tech-card p {
-        margin: 12px 0 0;
-        color: var(--slate);
-        font-size: 15px;
-        line-height: 1.58;
-      }
-
-      .card-points {
-        display: grid;
-        gap: 8px;
-        margin: 18px 0 0;
-        padding: 0;
-        color: var(--slate);
-        font-size: 14px;
-        line-height: 1.5;
-        list-style: none;
-      }
-
-      .card-points li {
-        position: relative;
-        padding-left: 18px;
-      }
-
-      .card-points li::before {
-        position: absolute;
-        top: 0.65em;
-        left: 0;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--green);
-        content: "";
-      }
-
-      .card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        margin-top: auto;
-        padding-top: 20px;
-      }
-
-      .patent {
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 700;
-      }
-
-      .open-link {
-        flex: 0 0 auto;
-        color: var(--ink);
-        font-size: 13px;
         font-weight: 800;
       }
 
-      .compare-band {
-        margin-top: 20px;
-        border: 1px solid var(--hairline);
-        border-radius: 8px;
-        background: #ffffff;
-        overflow: hidden;
+      .intro {
+        max-width: 720px;
+        margin: 18px 0 0;
+        color: var(--text);
+        font-size: 17px;
+        line-height: 1.65;
       }
 
-      .compare-row {
-        display: grid;
-        grid-template-columns: 180px repeat(3, minmax(0, 1fr));
-        border-bottom: 1px solid var(--hairline);
+      main {
+        padding: 36px 0 56px;
       }
 
-      .compare-row:last-child {
-        border-bottom: 0;
+      .section-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 16px;
       }
 
-      .compare-cell {
-        min-width: 0;
-        padding: 18px;
-        border-right: 1px solid var(--hairline-soft);
-        color: var(--slate);
+      h2 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .count {
+        color: var(--muted);
         font-size: 14px;
+        font-weight: 700;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 2px solid var(--ink);
+      }
+
+      th,
+      td {
+        padding: 18px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--soft);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      td {
+        color: var(--text);
+        font-size: 15px;
         line-height: 1.55;
       }
 
-      .compare-cell:last-child {
-        border-right: 0;
-      }
-
-      .compare-cell.head {
+      .no {
+        width: 64px;
         color: var(--ink);
-        background: var(--surface-soft);
         font-weight: 800;
       }
 
-      .compare-cell strong {
-        display: block;
-        margin-bottom: 5px;
+      .title {
+        min-width: 280px;
         color: var(--ink);
-        font-size: 15px;
-      }
-
-      .portfolio {
-        display: grid;
-        grid-template-columns: 0.82fr 1.18fr;
-        gap: 18px;
-        align-items: stretch;
-      }
-
-      .portfolio-panel,
-      .contact-panel {
-        border: 1px solid var(--hairline);
-        border-radius: 8px;
-        background: #ffffff;
-        box-shadow: 0 12px 32px rgba(10, 10, 10, 0.05);
-      }
-
-      .portfolio-panel {
-        overflow: hidden;
-      }
-
-      .portfolio-list {
-        display: grid;
-      }
-
-      .portfolio-item {
-        display: grid;
-        grid-template-columns: 40px 1fr;
-        gap: 14px;
-        padding: 18px;
-        border-bottom: 1px solid var(--hairline-soft);
-      }
-
-      .portfolio-item:last-child {
-        border-bottom: 0;
-      }
-
-      .portfolio-index {
-        display: grid;
-        width: 34px;
-        height: 34px;
-        place-items: center;
-        border-radius: 8px;
-        background: var(--ink);
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: 800;
-      }
-
-      .portfolio-item h3 {
-        margin: 0;
         font-size: 17px;
-        line-height: 1.42;
+        font-weight: 800;
       }
 
-      .portfolio-item p {
-        margin: 6px 0 0;
-        color: var(--steel);
-        font-size: 13px;
-        line-height: 1.45;
+      .field {
+        width: 160px;
+        color: var(--muted);
+        font-weight: 700;
       }
 
-      .contact-panel {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 28px;
-        color: #ffffff;
-        background:
-          linear-gradient(135deg, rgba(0, 180, 138, 0.24), transparent 48%),
-          linear-gradient(135deg, #0a0a0a 0%, #1c1c1e 100%);
+      .patent {
+        width: 210px;
+        color: var(--muted);
+        font-size: 14px;
       }
 
-      .contact-panel h2 {
-        margin: 0;
-        max-width: 600px;
-        font-size: clamp(28px, 4vw, 44px);
-        line-height: 1.16;
+      .open {
+        width: 120px;
+        text-align: right;
+        white-space: nowrap;
       }
 
-      .contact-panel p {
-        max-width: 660px;
-        margin: 14px 0 0;
-        color: rgba(255, 255, 255, 0.76);
+      .open a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 8px 14px;
+        border: 1px solid var(--ink);
+        border-radius: 4px;
+        background: var(--ink);
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .note {
+        margin-top: 22px;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+        color: var(--text);
         font-size: 15px;
         line-height: 1.65;
       }
 
-      .download-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 32px;
-      }
-
-      .download-row .button {
-        border-color: rgba(255, 255, 255, 0.22);
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .download-row .button.primary {
-        border-color: #ffffff;
-        color: var(--ink);
-        background: #ffffff;
-      }
-
-      .footer {
-        width: min(1180px, calc(100% - 40px));
-        margin: 0 auto;
-        padding: 42px 0;
+      footer {
+        padding: 26px 0 36px;
+        border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 13px;
         line-height: 1.5;
       }
 
-      @media (max-width: 980px) {
-        .hero,
-        .portfolio {
-          grid-template-columns: 1fr;
+      @media (max-width: 760px) {
+        .wrap {
+          width: min(100% - 28px, 1080px);
         }
 
-        .hero {
-          min-height: auto;
-          padding-top: 54px;
+        header {
+          padding-top: 36px;
         }
 
-        .tech-grid {
-          grid-template-columns: 1fr;
+        table,
+        thead,
+        tbody,
+        tr,
+        th,
+        td {
+          display: block;
         }
 
-        .compare-row {
-          grid-template-columns: 1fr;
+        thead {
+          display: none;
         }
 
-        .compare-cell {
-          border-right: 0;
-          border-bottom: 1px solid var(--hairline-soft);
+        tr {
+          padding: 16px 0;
+          border-bottom: 1px solid var(--line);
         }
 
-        .compare-cell:last-child {
+        td {
+          width: 100%;
+          padding: 4px 0;
           border-bottom: 0;
         }
-      }
 
-      @media (max-width: 720px) {
-        .topbar-inner,
-        .section,
-        .footer {
-          width: min(100% - 28px, 1180px);
-        }
-
-        .topbar-inner {
-          align-items: flex-start;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .nav-links {
+        .no,
+        .field,
+        .patent,
+        .open {
           width: 100%;
-          justify-content: flex-start;
-          overflow-x: auto;
-          padding-bottom: 2px;
         }
 
-        .hero-tech-row {
-          grid-template-columns: 42px 1fr;
-        }
-
-        .metric {
-          grid-column: 2;
+        .open {
+          margin-top: 12px;
           text-align: left;
-        }
-
-        .stats {
-          grid-template-columns: 1fr;
-        }
-
-        .section-heading {
-          grid-template-columns: 1fr;
-          padding-top: 56px;
-        }
-
-        .tech-card-body,
-        .contact-panel {
-          padding: 20px;
-        }
-
-        .card-footer {
-          align-items: flex-start;
-          flex-direction: column;
         }
       }
     </style>
   </head>
   <body>
-    <div class="site-shell">
-      <nav class="topbar" aria-label="주요 메뉴">
-        <div class="topbar-inner">
-          <a class="brand" href="#">
-            <span class="brand-mark">CU</span>
-            <span class="brand-text">가톨릭대학교 SMK 기술자료 허브</span>
-          </a>
-          <div class="nav-links">
-            <a href="#technologies">기술목록</a>
-            <a href="#compare">비교요약</a>
-            <a href="#portfolio">IP Portfolio</a>
-            <a href="#originals">원본보기</a>
-          </div>
-        </div>
-      </nav>
+    <header>
+      <div class="wrap">
+        <p class="label">가톨릭대학교 IP거래</p>
+        <h1>SMK 기술목록</h1>
+        <p class="intro">
+          가톨릭대학교 보유기술 3건의 SMK 자료입니다. 각 항목의 상세 기술내용, 적용분야, 특허정보는 원본 SMK에서 확인할 수 있습니다.
+        </p>
+      </div>
+    </header>
 
-      <main>
-        <section class="section hero" aria-labelledby="page-title">
-          <div>
-            <p class="eyebrow">2026 IP-LINK · 반도체 · 이차전지</p>
-            <h1 id="page-title">
-              <span class="title-line">가톨릭대 <strong>SMK 허브</strong></span>
-            </h1>
-            <p class="hero-copy">
-              이차전지 유기 전극 활물질, 페로브스카이트 퀀텀닷, 금속산화물 물분해 촉매 3개 기술을 사업화 관점에서 한 화면에 묶었습니다. 핵심 성능, 적용시장, 기술성숙도, 특허 현황을 빠르게 비교할 수 있습니다.
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#technologies">기술 3건 보기</a>
-              <a class="button secondary" href="#originals">원본 SMK 열기</a>
-            </div>
-          </div>
+    <main class="wrap">
+      <div class="section-title">
+        <h2>보유기술 목록</h2>
+        <span class="count">총 3건</span>
+      </div>
 
-          <aside class="hero-panel" aria-label="기술자료 요약">
-            <div class="panel-top">
-              <strong>Technology Bundle</strong>
-              <span class="status-pill">TRL 4 중심</span>
-            </div>
-            <div class="hero-tech-list">
-              <a class="hero-tech-row" href="#smk1">
-                <span class="tech-number">01</span>
-                <span>
-                  <h2>트립티센계 퀴논 유기 전극 활물질</h2>
-                  <p>고용량·고안정성 차세대 이차전지 소재</p>
-                </span>
-                <span class="metric">387 mAh/g</span>
-              </a>
-              <a class="hero-tech-row" href="#smk2">
-                <span class="tech-number">02</span>
-                <span>
-                  <h2>리간드-셸 페로브스카이트 퀀텀닷</h2>
-                  <p>환경 안정성·전하전달 개선 QD 소재</p>
-                </span>
-                <span class="metric">8 nm 미만</span>
-              </a>
-              <a class="hero-tech-row" href="#smk3">
-                <span class="tech-number">03</span>
-                <span>
-                  <h2>대면적 금속산화물 물분해 촉매</h2>
-                  <p>저온 단일공정 수전해 전극 코팅기술</p>
-                </span>
-                <span class="metric">1.41 V</span>
-              </a>
-            </div>
-            <div class="stats">
-              <div class="stat"><b>3</b><span>통합 SMK 기술자료</span></div>
-              <div class="stat"><b>3</b><span>등록 특허 기반 포트폴리오</span></div>
-              <div class="stat"><b>4</b><span>실험실 검증 단계 기술성숙도</span></div>
-            </div>
-          </aside>
-        </section>
+      <table aria-label="가톨릭대학교 SMK 기술목록">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>기술명</th>
+            <th>분야</th>
+            <th>특허정보</th>
+            <th>자료</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="no">01</td>
+            <td class="title">고용량·고안정성 트립티센계 퀴논 기반 차세대 이차전지 유기 전극 활물질</td>
+            <td class="field">이차전지 소재</td>
+            <td class="patent">등록 10-2093998</td>
+            <td class="open"><a href="smk1.html">SMK 보기</a></td>
+          </tr>
+          <tr>
+            <td class="no">02</td>
+            <td class="title">고안정성·고효율 전하전달이 가능한 리간드-셸 페로브스카이트 퀀텀닷</td>
+            <td class="field">반도체·디스플레이 소재</td>
+            <td class="patent">등록 10-2831063</td>
+            <td class="open"><a href="smk2.html">SMK 보기</a></td>
+          </tr>
+          <tr>
+            <td class="no">03</td>
+            <td class="title">저온 단일공정으로 제조 가능한 대면적 금속산화물 물분해 촉매</td>
+            <td class="field">수소에너지 소재</td>
+            <td class="patent">등록 10-2498214</td>
+            <td class="open"><a href="smk3.html">SMK 보기</a></td>
+          </tr>
+        </tbody>
+      </table>
 
-        <section class="section" id="technologies">
-          <div class="section-heading">
-            <h2>기술별 사업화 포인트</h2>
-            <p>각 SMK의 상세 내용을 유지하면서, 검토자가 먼저 확인해야 할 적용시장·개선점·연계기업 방향을 카드형으로 정리했습니다.</p>
-          </div>
+      <div class="note">
+        본 페이지는 SMK 3건을 한 곳에서 열람하기 위한 목록 페이지입니다. 세부 검토는 각 SMK 원본 페이지를 기준으로 진행합니다.
+      </div>
+    </main>
 
-          <div class="tech-grid">
-            <article class="tech-card" id="smk1">
-              <div class="tech-card-media">
-                <img src="assets/smk1/patent_fig1_capacity_voltage.png" alt="트립티센계 퀴논 전극 활물질 성능 그래프">
-              </div>
-              <div class="tech-card-body">
-                <div class="tag-row">
-                  <span class="tag green">이차전지 소재</span>
-                  <span class="tag">유기계 양극재</span>
-                  <span class="tag">TRL 4</span>
-                </div>
-                <h3>고용량·고안정성 트립티센계 퀴논 기반 차세대 이차전지 유기 전극 활물질</h3>
-                <p>3차원 트립티센 구조에 산화환원 활성 퀴논 기능단을 도입해 기존 퀴논계 활물질의 용해성·승화성 문제를 개선하는 기술입니다.</p>
-                <ul class="card-points">
-                  <li>초기 방전용량 387 mAh/g, 에너지밀도 1,032 Wh/kg 수준 성능 확인</li>
-                  <li>전기차 배터리팩, ESS 배터리 모듈, 고용량 리튬이온전지 적용 가능</li>
-                  <li>전극 제조기업 대상 라이선싱 및 공동 스케일업 검토 적합</li>
-                </ul>
-                <div class="card-footer">
-                  <span class="patent">10-2018-0046281 · 등록 10-2093998</span>
-                  <a class="open-link" href="smk1.html">원본 SMK 보기</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="tech-card" id="smk2">
-              <div class="tech-card-media">
-                <img src="assets/smk2/patent_fig.png" alt="페로브스카이트 퀀텀닷 광분해 성능 그래프">
-              </div>
-              <div class="tech-card-body">
-                <div class="tag-row">
-                  <span class="tag blue">반도체·디스플레이</span>
-                  <span class="tag">퀀텀닷 소재</span>
-                  <span class="tag">TRL 4</span>
-                </div>
-                <h3>고안정성·고효율 전하전달이 가능한 리간드-셸 페로브스카이트 퀀텀닷</h3>
-                <p>실란 리간드와 2가 알코올 가교결합으로 페로브스카이트 퀀텀닷 표면에 셸을 형성해 안정성과 전하전달 효율을 높이는 기술입니다.</p>
-                <ul class="card-points">
-                  <li>8 nm 미만 코어 크기 제어와 MV2+ 전자전달, MBT 광분해 성능 확인</li>
-                  <li>QD 필름, QLED 발광층, 광촉매 수처리 소재, 센서용 나노소재 적용 가능</li>
-                  <li>QD 소재·디스플레이 기업 대상 제조공정 라이선싱 검토 적합</li>
-                </ul>
-                <div class="card-footer">
-                  <span class="patent">10-2022-0072362 · 등록 10-2831063</span>
-                  <a class="open-link" href="smk2.html">원본 SMK 보기</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="tech-card" id="smk3">
-              <div class="tech-card-media">
-                <img src="assets/smk3/patent_fig.png" alt="금속산화물 물분해 촉매 OER 성능 그래프">
-              </div>
-              <div class="tech-card-body">
-                <div class="tag-row">
-                  <span class="tag orange">수소 에너지</span>
-                  <span class="tag">수전해 촉매</span>
-                  <span class="tag">TRL 4</span>
-                </div>
-                <h3>저온 단일공정으로 제조 가능한 대면적 금속산화물 물분해 촉매</h3>
-                <p>Co(OH)2 나노시트와 금속 양이온 전구체를 활용해 탄소섬유 기판 위에 스피넬 금속산화물 필름을 형성하는 수전해 촉매 기술입니다.</p>
-                <ul class="card-points">
-                  <li>MnCo3O4(0.01)/CFP 기준 개시전위 1.41V, 10 mA/cm² 전위 1.54V 확인</li>
-                  <li>수전해 전극, OER 촉매 코팅 전극, MEA/스택 부품 적용 가능</li>
-                  <li>수전해 스택·전극 제조기업 대상 공동개발 검토 적합</li>
-                </ul>
-                <div class="card-footer">
-                  <span class="patent">10-2021-0072178 · 등록 10-2498214</span>
-                  <a class="open-link" href="smk3.html">원본 SMK 보기</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="compare">
-          <div class="section-heading">
-            <h2>한 화면 비교요약</h2>
-            <p>기술수요기업 미팅 전 빠르게 볼 수 있도록 분야, 개선점, 적용제품, 사업화 연결 포인트를 나란히 정리했습니다.</p>
-          </div>
-
-          <div class="compare-band" role="table" aria-label="SMK 기술 비교표">
-            <div class="compare-row" role="row">
-              <div class="compare-cell head" role="columnheader">구분</div>
-              <div class="compare-cell head" role="columnheader">SMK 1</div>
-              <div class="compare-cell head" role="columnheader">SMK 2</div>
-              <div class="compare-cell head" role="columnheader">SMK 3</div>
-            </div>
-            <div class="compare-row" role="row">
-              <div class="compare-cell head" role="rowheader">분야</div>
-              <div class="compare-cell"><strong>이차전지 소재</strong>전극 활물질, 유기계 양극재, 트립티센계 퀴논 복합소재</div>
-              <div class="compare-cell"><strong>반도체·디스플레이</strong>퀀텀닷 소재, 페로브스카이트 QD, 리간드-셸 안정화 소재</div>
-              <div class="compare-cell"><strong>수소 에너지</strong>수전해 소재, 물분해 촉매, 스피넬 금속산화물 필름</div>
-            </div>
-            <div class="compare-row" role="row">
-              <div class="compare-cell head" role="rowheader">핵심 개선점</div>
-              <div class="compare-cell">트립티센 3차원 구조 기반 용해 저항성 및 열적 안정성 개선</div>
-              <div class="compare-cell">리간드-셸 기반 표면 패시베이션으로 환경 안정성과 전하전달 확보</div>
-              <div class="compare-cell">저온·수계 단일공정으로 탄소섬유 전극에 산화물 필름 직접 형성</div>
-            </div>
-            <div class="compare-row" role="row">
-              <div class="compare-cell head" role="rowheader">적용제품</div>
-              <div class="compare-cell">전기차 배터리팩, ESS 배터리 모듈, 고용량 리튬이온전지</div>
-              <div class="compare-cell">QD 필름, QLED 발광층, 광촉매 수처리 소재, 센서용 나노소재</div>
-              <div class="compare-cell">수전해 전극, OER 촉매 코팅 전극, MEA/스택 부품, 수소생산 시스템</div>
-            </div>
-            <div class="compare-row" role="row">
-              <div class="compare-cell head" role="rowheader">사업화 방향</div>
-              <div class="compare-cell">전극 제조기업과 합성 최적화, 탄소 복합화, 셀 제조사 성능검증 연계</div>
-              <div class="compare-cell">QD 소재·디스플레이 기업과 리간드-셸 최적화 및 필름·소자 적용 연계</div>
-              <div class="compare-cell">수전해 스택·전극 제조기업과 촉매 코팅 및 OER 성능검증 연계</div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="portfolio">
-          <div class="section-heading">
-            <h2>IP Portfolio</h2>
-            <p>3개 기술 모두 등록 특허 기반으로 정리되어 있어, 기술이전·공동연구·수요기업 매칭 검토자료로 바로 연결할 수 있습니다.</p>
-          </div>
-
-          <div class="portfolio">
-            <div class="portfolio-panel">
-              <div class="portfolio-list">
-                <div class="portfolio-item">
-                  <span class="portfolio-index">01</span>
-                  <div>
-                    <h3>이차 전지용 전극 활물질 및 이를 포함하는 이차 전지</h3>
-                    <p>출원 10-2018-0046281 · 등록 10-2093998 · 등록일 2020.03.20</p>
-                  </div>
-                </div>
-                <div class="portfolio-item">
-                  <span class="portfolio-index">02</span>
-                  <div>
-                    <h3>리간드-셸을 포함하는 페로브스카이트 퀀텀닷 및 이의 제조방법</h3>
-                    <p>출원 10-2022-0072362 · 등록 10-2831063 · 등록일 2025.07.02</p>
-                  </div>
-                </div>
-                <div class="portfolio-item">
-                  <span class="portfolio-index">03</span>
-                  <div>
-                    <h3>금속산화물 필름을 형성하는 방법 및 이로부터 제조된 물 분해용 촉매</h3>
-                    <p>출원 10-2021-0072178 · 등록 10-2498214 · 등록일 2023.02.06</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <aside class="contact-panel" id="originals">
-              <div>
-                <h2>상세 검토는 원본 SMK로 이어서 확인</h2>
-                <p>이 랜딩페이지는 3개 기술의 첫 검토용 허브입니다. 원본 파일에는 기술개요, 대표이미지, 시장동향, Business Idea, TRL, 관련문서 표가 개별 기술별로 포함되어 있습니다.</p>
-              </div>
-              <div class="download-row">
-                <a class="button primary" href="smk1.html">SMK 1 열기</a>
-                <a class="button" href="smk2.html">SMK 2 열기</a>
-                <a class="button" href="smk3.html">SMK 3 열기</a>
-              </div>
-            </aside>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <strong>Design reference:</strong> Mintlify-inspired documentation hub layout · <strong>Source:</strong> 가톨릭대학교 SMK 1~3 HTML files
-      </footer>
-    </div>
+    <footer>
+      <div class="wrap">Source: 가톨릭대학교 SMK 1~3 HTML files</div>
+    </footer>
   </body>
 </html>
