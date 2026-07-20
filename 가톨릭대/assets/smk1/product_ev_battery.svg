@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7f7fb"/>
+      <stop offset="1" stop-color="#eef7f3"/>
+    </linearGradient>
+    <linearGradient id="pack" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7132f5"/>
+      <stop offset="1" stop-color="#149e61"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="320" fill="url(#bg)"/>
+  <path d="M74 214 C98 140 168 88 272 82 C374 76 434 126 458 204" fill="none" stroke="#101114" stroke-width="18" stroke-linecap="round" opacity=".86"/>
+  <rect x="96" y="118" width="328" height="116" rx="16" fill="#ffffff" stroke="#dedee5" stroke-width="5"/>
+  <g transform="translate(122 142)">
+    <rect width="48" height="68" rx="8" fill="url(#pack)"/>
+    <rect x="58" width="48" height="68" rx="8" fill="url(#pack)" opacity=".86"/>
+    <rect x="116" width="48" height="68" rx="8" fill="url(#pack)" opacity=".72"/>
+    <rect x="174" width="48" height="68" rx="8" fill="url(#pack)" opacity=".86"/>
+    <rect x="232" width="48" height="68" rx="8" fill="url(#pack)"/>
+  </g>
+  <circle cx="142" cy="246" r="28" fill="#101114"/>
+  <circle cx="378" cy="246" r="28" fill="#101114"/>
+  <text x="260" y="292" text-anchor="middle" font-family="Pretendard, Malgun Gothic, Arial, sans-serif" font-size="24" font-weight="800" fill="#101114">전기차 배터리팩</text>
+</svg>

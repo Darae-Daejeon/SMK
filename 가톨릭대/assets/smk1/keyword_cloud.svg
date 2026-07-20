@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="240" viewBox="0 0 600 240">
+  <rect width="600" height="240" rx="22" fill="#fbfaff"/>
+  <g font-family="Pretendard, Malgun Gothic, Arial, sans-serif" font-size="24" font-weight="800" fill="#686b82">
+    <text x="64" y="100"># 유기 양극재</text>
+    <text x="254" y="100"># 트립티센</text>
+    <text x="438" y="100"># 퀴논</text>
+    <text x="78" y="154"># 고용량</text>
+    <text x="230" y="154"># 용해 저항성</text>
+    <text x="418" y="154"># 친환경 소재</text>
+  </g>
+</svg>
