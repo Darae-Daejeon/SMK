@@ -866,24 +866,48 @@
         }
       }
 
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
       @media print {
+        html,
+        body {
+          width: 297mm;
+          height: 210mm;
+          margin: 0;
+          padding: 0;
+        }
+
         .image-lightbox {
           display: none !important;
         }
 
         body {
           background: #ffffff;
-          overflow: visible;
+          overflow: hidden;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
 
         .slide-stage {
-          width: 1600px;
-          height: 900px;
+          position: relative;
+          width: 297mm;
+          height: 210mm;
+          display: block;
+          overflow: hidden;
         }
 
         .smk-slide {
+          position: absolute;
+          top: 6mm;
+          left: 6mm;
+          width: 1600px;
+          height: 900px;
           box-shadow: none;
-          transform: none !important;
+          transform: scaleX(0.6732) scaleY(0.8315) !important;
+          transform-origin: top left;
         }
       }
     </style>
