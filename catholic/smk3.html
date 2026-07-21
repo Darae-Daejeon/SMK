@@ -791,7 +791,88 @@
         font-family: inherit;
       }
 
+      .representative-image {
+        cursor: zoom-in;
+      }
+
+      .representative-image:focus-visible {
+        outline: 3px solid var(--kraken-purple);
+        outline-offset: 3px;
+      }
+
+      .image-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: rgba(16, 17, 20, 0.86);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 180ms ease, visibility 0s linear 180ms;
+      }
+
+      .image-lightbox.is-open {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
+      }
+
+      .image-lightbox-image {
+        display: block;
+        max-width: 92vw;
+        max-height: 90vh;
+        object-fit: contain;
+        background: #ffffff;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
+      }
+
+      .image-lightbox-close {
+        position: fixed;
+        top: 18px;
+        right: 22px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.14);
+        font: 400 34px/1 Arial, sans-serif;
+        cursor: pointer;
+      }
+
+      .image-lightbox-close:hover,
+      .image-lightbox-close:focus-visible {
+        background: rgba(255, 255, 255, 0.24);
+        outline: 2px solid #ffffff;
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 640px) {
+        .image-lightbox {
+          padding: 16px;
+        }
+
+        .image-lightbox-image {
+          max-width: 96vw;
+          max-height: 88vh;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .image-lightbox {
+          transition: none;
+        }
+      }
+
       @media print {
+        .image-lightbox {
+          display: none !important;
+        }
+
         body {
           background: #ffffff;
           overflow: visible;
@@ -1047,11 +1128,71 @@
       </article>
     </main>
 
+    <div
+      class="image-lightbox"
+      id="image-lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="대표 이미지 확대 보기"
+      aria-hidden="true"
+    >
+      <button class="image-lightbox-close" id="image-lightbox-close" type="button" aria-label="확대 이미지 닫기">&times;</button>
+      <img class="image-lightbox-image" id="image-lightbox-image" alt="">
+    </div>
+
     <script>
       (function () {
         const slide = document.getElementById("smk-slide");
         const designWidth = 1600;
         const designHeight = 900;
+
+        function setupImageLightbox() {
+          const representativeImage = document.getElementById("tech-representative-image");
+          const lightbox = document.getElementById("image-lightbox");
+          const lightboxImage = document.getElementById("image-lightbox-image");
+          const closeButton = document.getElementById("image-lightbox-close");
+          let previousBodyOverflow = "";
+
+          if (!representativeImage || !lightbox || !lightboxImage || !closeButton) return;
+
+          representativeImage.tabIndex = 0;
+          representativeImage.setAttribute("role", "button");
+          representativeImage.setAttribute("aria-haspopup", "dialog");
+          representativeImage.setAttribute("aria-label", `${representativeImage.alt} 확대 보기`);
+
+          function openLightbox() {
+            lightboxImage.src = representativeImage.currentSrc || representativeImage.src;
+            lightboxImage.alt = representativeImage.alt;
+            previousBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = "hidden";
+            lightbox.classList.add("is-open");
+            lightbox.setAttribute("aria-hidden", "false");
+            closeButton.focus();
+          }
+
+          function closeLightbox() {
+            if (!lightbox.classList.contains("is-open")) return;
+            lightbox.classList.remove("is-open");
+            lightbox.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = previousBodyOverflow;
+            representativeImage.focus();
+          }
+
+          representativeImage.addEventListener("click", openLightbox);
+          representativeImage.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openLightbox();
+            }
+          });
+          closeButton.addEventListener("click", closeLightbox);
+          lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) closeLightbox();
+          });
+          document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") closeLightbox();
+          });
+        }
 
         function fitSlide() {
           const padding = 16;
@@ -1184,6 +1325,7 @@
 
         window.addEventListener("resize", fitSlide);
         fitSlide();
+        setupImageLightbox();
         syncBusinessImageCount();
         renderMarketChart();
       })();
