@@ -187,7 +187,7 @@ def image_tag(filename: str, width: int, height: int, alt: str) -> str:
     src = f"{PUBLIC_BASE}assets/{filename}"
     return (
         f'<img src="{src}" width="{width}" height="{height}" alt="{alt}" '
-        f'style="display:block; width:{width}px; max-width:100%; height:auto; margin:0; padding:0; border:0; outline:none; text-decoration:none;">'
+        f'style="display:block; width:100%; max-width:{width}px; height:auto; margin:0; padding:0; border:0; outline:none; text-decoration:none;">'
     )
 
 
@@ -226,7 +226,7 @@ def build_html() -> Path:
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; margin:0; padding:0; border-collapse:collapse; background:#eef2f6;">
       <tr>
         <td align="center" style="padding:24px 0;">
-          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px; max-width:100%; margin:0; border-collapse:collapse; background:#ffffff;">
+          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%; max-width:600px; margin:0; border-collapse:collapse; background:#ffffff;">
             <tr><td style="padding:0;">{header}</td></tr>
             <tr>
               <td style="padding:27px 32px 9px 32px; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; color:#102a43;">
@@ -236,7 +236,7 @@ def build_html() -> Path:
             </tr>
             <tr>
               <td style="padding:20px 0 10px 0;">
-                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px; max-width:100%; border-collapse:collapse;">
+                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%; max-width:600px; border-collapse:collapse;">
 {chr(10).join(card_rows)}
                 </table>
               </td>
