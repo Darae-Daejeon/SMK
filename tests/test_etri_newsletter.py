@@ -7,6 +7,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 NEWSLETTER = ROOT / "ETRI" / "newsletter" / "etri-medical-ai-newsletter.html"
+PUBLIC_ASSET_BASE = "https://darae-daejeon.github.io/SMK/ETRI/newsletter/"
 
 
 class EtriNewsletterTests(unittest.TestCase):
@@ -43,7 +44,9 @@ class EtriNewsletterTests(unittest.TestCase):
             self.assertIsNotNone(width_match, tag)
             self.assertIsNotNone(height_match, tag)
             self.assertRegex(tag, r'alt="[^"]+"')
-            path = NEWSLETTER.parent / src_match.group(1)
+            self.assertTrue(src_match.group(1).startswith(PUBLIC_ASSET_BASE))
+            relative_src = src_match.group(1).removeprefix(PUBLIC_ASSET_BASE)
+            path = NEWSLETTER.parent / relative_src
             self.assertTrue(path.exists(), path)
             with Image.open(path) as image:
                 self.assertEqual(
