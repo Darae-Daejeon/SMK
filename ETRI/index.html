@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ETRI IP거래 기술목록</title>
+    <meta name="description" content="ETRI 보유 SMK 기술목록">
+    <style>
+      :root {
+        --ink: #111318;
+        --text: #343841;
+        --muted: #707681;
+        --line: #dce0e7;
+        --soft: #f4f7fb;
+        --white: #ffffff;
+        --blue: #075ca8;
+        --orange: #e97824;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--white);
+        color: var(--ink);
+        font-family: Pretendard, "Noto Sans KR", "Segoe UI", Arial, sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: min(1280px, calc(100% - 24px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: relative;
+        padding: 48px 0 34px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      header::before {
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--blue) 0 78%, var(--orange) 78% 100%);
+        content: "";
+      }
+
+      .label {
+        margin: 0 0 14px;
+        color: var(--blue);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.12;
+        font-weight: 800;
+      }
+
+      main {
+        padding: 36px 0 56px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 16px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .count {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        min-width: 1040px;
+        border-collapse: collapse;
+        border-top: 2px solid var(--ink);
+      }
+
+      th,
+      td {
+        padding: 17px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+
+      th {
+        background: var(--soft);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      td {
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .no {
+        width: 52px;
+        color: var(--ink);
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .title {
+        min-width: 560px;
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 800;
+      }
+
+      .field {
+        width: 170px;
+        color: var(--muted);
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .patent {
+        width: 210px;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .open {
+        width: 120px;
+        text-align: right;
+      }
+
+      .open a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 8px 14px;
+        border: 1px solid var(--blue);
+        border-radius: 4px;
+        background: var(--blue);
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .empty-state {
+        height: 132px;
+        color: var(--muted);
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .empty-state-message {
+        display: inline-block;
+      }
+
+      @media (max-width: 760px) {
+        .wrap {
+          width: min(100% - 16px, 1280px);
+        }
+
+        header {
+          padding-top: 36px;
+        }
+
+        .empty-state {
+          text-align: left;
+        }
+
+        .empty-state-message {
+          position: sticky;
+          left: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <p class="label">ETRI 보유기술</p>
+        <h1>SMK 기술목록</h1>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="section-title">
+        <h2>기술 목록</h2>
+        <span class="count">총 4건</span>
+      </div>
+
+      <div class="table-scroll">
+        <table aria-label="ETRI SMK 기술목록">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>기술명</th>
+              <th>분야</th>
+              <th>ETRI 기술번호</th>
+              <th>자료</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="no">1</td>
+              <td class="title">미래 건강 예측을 위한 의료지능 딥러닝 엔진 기술</td>
+              <td class="field">의료 인공지능</td>
+              <td class="patent">3610-2021-02099</td>
+              <td class="open"><a href="tech-01.html" target="_blank" rel="noopener">SMK 보기</a></td>
+            </tr>
+            <tr>
+              <td class="no">2</td>
+              <td class="title">미래 건강상태 및 예후 예측을 위한 헬스케어 인공지능 기술</td>
+              <td class="field">확률 기반 예후 예측</td>
+              <td class="patent">3610-2023-00011</td>
+              <td class="open"><a href="tech-02.html" target="_blank" rel="noopener">SMK 보기</a></td>
+            </tr>
+            <tr>
+              <td class="no">3</td>
+              <td class="title">개인 맞춤형 건강 관리 프로그램을 계획하는 인공지능 헬스케어 기술</td>
+              <td class="field">맞춤형 치료계획</td>
+              <td class="patent">5310-2023-00421</td>
+              <td class="open"><a href="tech-03.html" target="_blank" rel="noopener">SMK 보기</a></td>
+            </tr>
+            <tr>
+              <td class="no">4</td>
+              <td class="title">미래 건강 상태의 맞춤형 예측 및 최적 관리를 위한 인공지능 기술</td>
+              <td class="field">예측·최적관리</td>
+              <td class="patent">5310-2025-00388</td>
+              <td class="open"><a href="tech-04.html" target="_blank" rel="noopener">SMK 보기</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <template id="smk-row-template">
+      <tr>
+        <td class="no">{번호}</td>
+        <td class="title">{기술명}</td>
+        <td class="field">{분야}</td>
+        <td class="patent">{출원번호}</td>
+        <td class="open"><a href="{SMK 파일명}.html" target="_blank" rel="noopener">SMK 보기</a></td>
+      </tr>
+    </template>
+  </body>
+</html>
