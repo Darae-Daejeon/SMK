@@ -18,22 +18,35 @@ class EtriNewsletterTests(unittest.TestCase):
     def test_uses_email_safe_structure(self):
         self.assertIn('role="presentation"', self.html)
         self.assertIn('width="600"', self.html)
-        self.assertIn('data-design-reference="kist-editorial-2026"', self.html)
+        self.assertIn('data-design-reference="etri-tech-series-poster-2026"', self.html)
         self.assertNotIn("<script", self.html.lower())
         self.assertNotIn("<map", self.html.lower())
         self.assertNotRegex(self.html.lower(), r"display\s*:\s*(grid|flex)")
 
-    def test_uses_high_resolution_hero_and_text_only_technology_rows(self):
-        self.assertIn("newsletter-hero.png", self.html)
-        self.assertEqual(self.html.count('data-tech-row="'), 4)
+    def test_uses_high_resolution_linked_poster_slices(self):
+        expected = [
+            ("poster-hero.png", (1200, 1000), (600, 500)),
+            ("poster-tech-01.png", (1200, 360), (600, 180)),
+            ("poster-tech-02.png", (1200, 360), (600, 180)),
+            ("poster-tech-03.png", (1200, 360), (600, 180)),
+            ("poster-tech-04.png", (1200, 360), (600, 180)),
+            ("poster-contact-main.png", (1200, 260), (600, 130)),
+            ("poster-contact-phone.png", (1200, 160), (600, 80)),
+        ]
+        self.assertEqual(self.html.count("<img "), 7)
         self.assertNotIn("-folder.png", self.html)
         self.assertNotIn("representative.png", self.html)
+        self.assertNotIn("data-tech-row", self.html)
 
-        hero = NEWSLETTER.parent / "assets" / "newsletter-hero.png"
-        self.assertTrue(hero.exists(), hero)
-        with Image.open(hero) as image:
-            self.assertEqual(image.size, (1200, 760))
-        self.assertIn('width="600" height="380"', self.html)
+        for filename, natural_size, display_size in expected:
+            path = NEWSLETTER.parent / "assets" / filename
+            self.assertTrue(path.exists(), path)
+            with Image.open(path) as image:
+                self.assertEqual(image.size, natural_size)
+            self.assertIn(
+                f'assets/{filename}" width="{display_size[0]}" height="{display_size[1]}"',
+                self.html,
+            )
 
     def test_has_no_disposable_footer_copy(self):
         self.assertNotIn("ETRI 보유기술 사업화 협력 안내", self.html)
