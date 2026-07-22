@@ -1,35 +1,37 @@
 # ETRI newsletter design QA
 
-- Source of truth: `C:\Users\JEON\Documents\홍보물제작\KISTpromotion-pages\kist-connect-2026.png`
+- Reference: `C:\Users\JEON\Documents\홍보물제작\KISTpromotion-pages\kist-connect-2026.png`
 - Implementation: `C:\Users\JEON\Documents\기술판매\ETRI\newsletter\etri-medical-ai-newsletter.html`
-- Desktop screenshot: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\desktop.png`
-- Mobile screenshot: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\mobile.png`
-- Combined comparison: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\kist-reference-vs-etri.png`
+- Desktop capture: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\desktop.png`
+- Mobile capture: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\mobile.png`
+- Side-by-side comparison: `C:\Users\JEON\Documents\기술판매\tmp\etri-newsletter\kist-reference-vs-etri.png`
+
+## Rejected elements removed
+
+- Folder-shaped technology cards removed.
+- Technology-card images removed.
+- Thin variable-font rendering removed.
+- Previous dark contact panel removed.
+- Disposable footer sentence removed.
+- Previous 600 x 420 raster hero replaced with a 1200 x 760 high-resolution export displayed at 600 x 380.
+
+## Final visual system
+
+- KIST reference retained only as hierarchy guidance: dark navy hero, strong cyan headline, numbered technology list, and clear terminal CTA.
+- Technology links rendered as clean editorial rows with no decorative containers or embedded imagery.
+- Korean headline rasterized with Malgun Gothic Bold at 2x resolution.
+- Technology copy remains live HTML text for legibility and email compatibility.
+- Contact reduced to one cyan block containing only the action, email, and phone number.
 
 ## Verification
 
-- Desktop viewport: 900 x 1000 px; newsletter rendered at 600 px.
-- Mobile viewport: 360 x 800 px; newsletter rendered at 360 px.
-- Reference comparison width: 600 px.
-- Implementation comparison width: 600 px.
-- Full-page desktop and mobile captures reviewed.
-- Hero, two-column technology cards, CTA/contact block, and footer reviewed as focused regions.
-
-## Findings and fixes
-
-- Matched the KIST reference hierarchy: dark navy field, oversized cyan headline, right-side technical hero image, two-column folder cards, cyan CTA accents, and compact footer.
-- Replaced the original one-column white cards with four 280 x 190 px linked raster cards.
-- Kept each technology card as an individual link instead of using an image map.
-- Preserved the 600 px table-based email structure and absolute GitHub Pages asset URLs.
-- Found contact text overlap in the 360 px render; changed the contact block to a centered stacked layout.
-- Final render: zero horizontal overflow, zero console errors, and zero failed image requests.
-
-## History
-
-1. Initial KIST-style implementation completed and rendered.
-2. Mobile contact overlap found during visual review.
-3. Contact block stacked and re-rendered.
-4. Desktop and mobile validation passed.
+- Desktop viewport: 900 x 1000 px; newsletter width 600 px.
+- Mobile viewport: 360 x 800 px; newsletter width 360 px.
+- Four technology links, email link, and telephone link present.
+- Zero horizontal overflow.
+- Zero console errors.
+- Zero failed image requests.
+- Six automated tests passed.
 
 ## Final result
 
