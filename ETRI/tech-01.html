@@ -43,21 +43,22 @@
       }
 
       .slide-stage {
+        position: relative;
         width: 100vw;
         height: 100vh;
-        display: grid;
-        place-items: center;
         overflow: hidden;
       }
 
       .smk-slide {
-        position: relative;
+        position: absolute;
+        top: 50%;
+        left: 50%;
         width: 1600px;
         height: 900px;
         overflow: hidden;
         background: var(--white);
         box-shadow: rgba(0, 0, 0, 0.08) 0 16px 50px;
-        transform: scale(var(--slide-scale, 1));
+        transform: translate(-50%, -50%) scale(var(--slide-scale, 1));
         transform-origin: center center;
       }
 
