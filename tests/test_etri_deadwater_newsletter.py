@@ -6,33 +6,60 @@ PAGE = ROOT / "ETRI" / "deadwater-newsletter" / "index.html"
 ASSETS = PAGE.parent / "assets"
 
 
-def test_deadwater_newsletter_structure():
+def test_original_deadwater_skeleton_is_preserved():
+    html = PAGE.read_text(encoding="utf-8")
+
+    # The source is a large self-contained document with embedded fonts.
+    # The video/showreel bitmap is intentionally removed; embedded source fonts remain.
+    assert len(html) > 90_000
+    for selector in (
+        'class="page-shell"',
+        'class="studio-header"',
+        'class="hero"',
+        'class="hero-wordmark"',
+        'class="hero-copy"',
+        'class="projects"',
+        'class="project-list"',
+        'class="project-preview"',
+        'class="custom-cursor"',
+    ):
+        assert selector in html
+
+    assert ".project-name {" in html
+    assert "font-size: 80px" in html
+    assert "--canvas-width" not in html
+    assert "max-width: 800px" not in html
+
+
+def test_etri_content_replaces_only_source_content():
     html = PAGE.read_text(encoding="utf-8")
 
     assert "ETRI IP거래 기술목록" in html
-    assert "--canvas-width: 800px" in html
-    assert "ETRI기술번호" not in html
-    assert "ETRI 기술번호" not in html
-    assert "특허출원번호" in html
-    assert "showreel" not in html.lower()
+    assert 'src="assets/etri-logo.png"' in html
+    assert ">ETRI IP<" in html
+    assert "한국전자통신연구원" in html
+    assert '<div class="showreel"' not in html.lower()
+    assert "const showreel" not in html.lower()
     assert "<video" not in html.lower()
     assert 'id="expertise"' not in html
+    assert "Expertise" not in html
+    assert "ETRI기술번호" not in html
+    assert "ETRI 기술번호" not in html
+    assert '>SMK 보기</div>' in html
+    assert '>Lecture</div>' not in html
 
     for number in range(1, 5):
         url = f"https://darae-daejeon.github.io/SMK/ETRI/tech-0{number}.html"
         assert html.count(url) == 1
-        assert f'data-preview="assets/smk-0{number}.png"' in html
+        assert f'data-image="assets/smk-0{number}.png"' in html
         assert (ASSETS / f"smk-0{number}.png").is_file()
 
     assert html.count('target="_blank"') == 4
-    assert (ASSETS / "etri-logo.png").is_file()
-    assert (ASSETS / "humane.woff2").is_file()
-    assert (ASSETS / "inter.woff2").is_file()
+    assert html.count("특허출원번호") == 4
 
 
 def test_representative_patent_application_numbers():
     html = PAGE.read_text(encoding="utf-8")
-
     for number in (
         "10-2018-0147862",
         "10-2021-0179326",
@@ -40,4 +67,3 @@ def test_representative_patent_application_numbers():
         "10-2024-0172319",
     ):
         assert number in html
-

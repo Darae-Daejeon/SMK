@@ -53,18 +53,20 @@ passed
 
 ## Reference interpretation
 
-- Retain the black editorial canvas, oversized condensed wordmark, fine rules, compact metadata, and inverted row-hover behavior.
+- Use the original `deadwater.html` as the implementation skeleton rather than redrawing its composition.
+- Retain its embedded fonts, full-width canvas, black editorial field, oversized condensed wordmark, spacing system, fine rules, project list, reveal behavior, custom cursor, and sticky preview.
 - Limit the page to the source composition before the Expertise section.
-- Replace showreel behavior with SMK image previews and direct technology links.
+- Remove the showreel DOM and behavior, then connect the original project-preview interaction to SMK captures and direct technology links.
 
 ## Verification
 
-- Desktop canvas: exactly 800 px.
+- Desktop canvas: unrestricted full viewport width; verified at 1440 px.
 - Mobile viewport: zero horizontal overflow at 390 px.
 - Four technology links: new-tab targets verified.
 - Hover preview: row 02 loads `smk-02.png` and becomes visible.
 - Zero video elements, zero Expertise section, and zero browser console errors.
-- Automated structural tests: 2 passed.
+- Original structural selectors and 80 px source project typography remain in the generated document.
+- Automated structural tests: 3 passed.
 
 ## Final result
 

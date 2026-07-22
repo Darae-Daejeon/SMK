@@ -25,13 +25,14 @@ def main() -> None:
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 1060, "height": 900}, device_scale_factor=1)
+        page = browser.new_page(viewport={"width": 1440, "height": 1000}, device_scale_factor=1)
         page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
         page.goto(PAGE.as_uri(), wait_until="load")
+        page.locator(".reveal").evaluate_all("els => els.forEach(el => el.classList.add('is-visible'))")
         page.screenshot(path=str(OUT / "desktop.png"), full_page=True)
 
-        canvas_width = page.locator(".newsletter").evaluate("el => Math.round(el.getBoundingClientRect().width)")
-        assert canvas_width == 800, canvas_width
+        shell_width = page.locator(".page-shell").evaluate("el => Math.round(el.getBoundingClientRect().width)")
+        assert shell_width == 1440, shell_width
         assert page.locator(".project-link").count() == 4
         assert page.locator("video").count() == 0
         assert page.locator("#expertise").count() == 0
@@ -39,8 +40,8 @@ def main() -> None:
         second = page.locator(".project-link").nth(1)
         second.hover(position={"x": 250, "y": 80})
         page.wait_for_timeout(250)
-        assert page.locator(".preview").evaluate("el => el.classList.contains('is-visible')")
-        assert page.locator(".preview img").get_attribute("src") == "assets/smk-02.png"
+        assert page.locator(".project-preview").get_attribute("data-visible") == "true"
+        assert page.locator(".project-preview img").get_attribute("src") == "assets/smk-02.png"
         page.screenshot(path=str(OUT / "hover-tech-02.png"), full_page=False)
 
         mobile = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1)
@@ -48,13 +49,14 @@ def main() -> None:
         mobile.screenshot(path=str(OUT / "mobile.png"), full_page=True)
         assert mobile.locator("body").evaluate("el => el.scrollWidth") == 390
 
-        reference = browser.new_page(viewport={"width": 1060, "height": 900}, device_scale_factor=1)
+        reference = browser.new_page(viewport={"width": 1440, "height": 1000}, device_scale_factor=1)
         reference.goto(REFERENCE.as_uri(), wait_until="load")
+        reference.locator(".reveal").evaluate_all("els => els.forEach(el => el.classList.add('is-visible'))")
         expertise = reference.locator("#expertise")
         clip_height = round(expertise.bounding_box()["y"]) if expertise.count() else 1500
         reference.screenshot(
             path=str(OUT / "reference-before-expertise.png"),
-            clip={"x": 0, "y": 0, "width": 1060, "height": clip_height},
+            clip={"x": 0, "y": 0, "width": 1440, "height": clip_height},
         )
         browser.close()
 
