@@ -18,9 +18,26 @@ class EtriNewsletterTests(unittest.TestCase):
     def test_uses_email_safe_structure(self):
         self.assertIn('role="presentation"', self.html)
         self.assertIn('width="600"', self.html)
+        self.assertIn('data-design-reference="kist-connect-2026"', self.html)
         self.assertNotIn("<script", self.html.lower())
         self.assertNotIn("<map", self.html.lower())
         self.assertNotRegex(self.html.lower(), r"display\s*:\s*(grid|flex)")
+
+    def test_uses_kist_style_two_column_visual_cards(self):
+        self.assertIn("newsletter-hero.png", self.html)
+        self.assertEqual(self.html.count('width="280" height="190"'), 4)
+        self.assertEqual(self.html.count('data-tech-card="'), 4)
+
+        hero = NEWSLETTER.parent / "assets" / "newsletter-hero.png"
+        self.assertTrue(hero.exists(), hero)
+        with Image.open(hero) as image:
+            self.assertEqual(image.size, (600, 420))
+
+        for number in range(1, 5):
+            card = NEWSLETTER.parent / "assets" / f"tech-{number:02d}-folder.png"
+            self.assertTrue(card.exists(), card)
+            with Image.open(card) as image:
+                self.assertEqual(image.size, (280, 190))
 
     def test_has_four_unique_smk_links(self):
         for number in range(1, 5):

@@ -2,218 +2,223 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "ETRI" / "newsletter"
 ASSET_DIR = OUTPUT_DIR / "assets"
+SOURCE_DIR = OUTPUT_DIR / "source-assets"
 PUBLIC_BASE = "https://darae-daejeon.github.io/SMK/ETRI/newsletter/"
 
 TECHNOLOGIES = [
     {
         "number": "01",
-        "title": "미래 건강 예측을 위한 의료지능 딥러닝 엔진 기술",
-        "value": "의료 데이터를 분석해 개인의 미래 건강 위험을 예측",
-        "field": "의료 데이터 분석 · 미래 건강 예측",
+        "title": "미래 건강 예측을 위한\n의료지능 딥러닝 엔진 기술",
+        "keyword": "DEEP LEARNING ENGINE",
         "source": ROOT / "ETRI" / "assets" / "tech-01" / "representative.png",
         "url": "https://darae-daejeon.github.io/SMK/ETRI/tech-01.html",
-        "accent": "#00A6A6",
-        "tint": "#DDF7F5",
+        "base": "#20D5E5",
+        "deep": "#087A9C",
     },
     {
         "number": "02",
-        "title": "미래 건강상태 및 예후 예측을 위한 헬스케어 인공지능 기술",
-        "value": "불확실성을 반영해 건강상태와 예후를 확률로 예측",
-        "field": "확률 기반 예후 예측 · 의사결정 지원",
+        "title": "미래 건강상태 및 예후 예측\n헬스케어 인공지능 기술",
+        "keyword": "PROGNOSIS AI",
         "source": ROOT / "ETRI" / "assets" / "tech-02" / "representative.png",
         "url": "https://darae-daejeon.github.io/SMK/ETRI/tech-02.html",
-        "accent": "#2474C6",
-        "tint": "#E3EFFB",
+        "base": "#37C8F1",
+        "deep": "#2363B4",
     },
     {
         "number": "03",
-        "title": "개인 맞춤형 건강 관리 프로그램을 계획하는 인공지능 헬스케어 기술",
-        "value": "개인의 상태와 목표에 맞춘 건강 관리 계획을 자동 수립",
-        "field": "맞춤형 건강 관리 · 치료계획 최적화",
+        "title": "개인 맞춤형 건강 관리 계획\n인공지능 헬스케어 기술",
+        "keyword": "PERSONALIZED CARE",
         "source": ROOT / "ETRI" / "assets" / "tech-03" / "representative.png",
         "url": "https://darae-daejeon.github.io/SMK/ETRI/tech-03.html",
-        "accent": "#6658C8",
-        "tint": "#ECE9FC",
+        "base": "#2FDCC6",
+        "deep": "#087B8F",
     },
     {
         "number": "04",
-        "title": "미래 건강 상태의 맞춤형 예측 및 최적 관리를 위한 인공지능 기술",
-        "value": "개인별 미래 건강상태를 예측하고 관리 전략을 최적화",
-        "field": "맞춤형 예측 · 건강 관리 최적화",
+        "title": "미래 건강 상태 맞춤형 예측 및\n최적 관리 인공지능 기술",
+        "keyword": "OPTIMAL HEALTH",
         "source": ROOT / "ETRI" / "assets" / "tech-04" / "representative.png",
         "url": "https://darae-daejeon.github.io/SMK/ETRI/tech-04.html",
-        "accent": "#D46A42",
-        "tint": "#FCEAE3",
+        "base": "#6CB8ED",
+        "deep": "#4149A5",
     },
 ]
 
 
-def load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     candidates = [
+        Path("C:/Windows/Fonts/NotoSansKR-VF.ttf"),
         Path("C:/Windows/Fonts/malgunbd.ttf" if bold else "C:/Windows/Fonts/malgun.ttf"),
-        Path("C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf"),
     ]
-    for path in candidates:
-        if path.exists():
-            return ImageFont.truetype(str(path), size)
-    raise FileNotFoundError("Malgun Gothic or Arial font was not found")
+    for candidate in candidates:
+        if candidate.exists():
+            return ImageFont.truetype(str(candidate), size)
+    raise FileNotFoundError("A Korean font was not found")
 
 
-def cover(source: Path, size: tuple[int, int]) -> Image.Image:
-    with Image.open(source) as image:
-        converted = image.convert("RGB")
-        scale = max(size[0] / converted.width, size[1] / converted.height)
-        resized = converted.resize(
-            (round(converted.width * scale), round(converted.height * scale)),
-            Image.Resampling.LANCZOS,
-        )
-        left = (resized.width - size[0]) // 2
-        top = (resized.height - size[1]) // 2
-        return resized.crop((left, top, left + size[0], top + size[1]))
+def cover(source: Path, size: tuple[int, int], focus_x: float = 0.5) -> Image.Image:
+    with Image.open(source) as opened:
+        image = opened.convert("RGB")
+    scale = max(size[0] / image.width, size[1] / image.height)
+    image = image.resize(
+        (round(image.width * scale), round(image.height * scale)), Image.Resampling.LANCZOS
+    )
+    max_left = image.width - size[0]
+    left = round(max_left * focus_x)
+    top = (image.height - size[1]) // 2
+    return image.crop((left, top, left + size[0], top + size[1]))
 
 
-def wrap_text(
-    draw: ImageDraw.ImageDraw,
-    text: str,
-    font: ImageFont.FreeTypeFont,
-    width: int,
-) -> list[str]:
-    lines: list[str] = []
-    current = ""
-    for word in text.split():
-        candidate = f"{current} {word}".strip()
-        if draw.textbbox((0, 0), candidate, font=font)[2] <= width:
-            current = candidate
-            continue
-        if current:
-            lines.append(current)
-        current = word
-    if current:
-        lines.append(current)
-    return lines
+def vertical_gradient(size: tuple[int, int], top: str, bottom: str) -> Image.Image:
+    start = tuple(int(top[i : i + 2], 16) for i in (1, 3, 5))
+    end = tuple(int(bottom[i : i + 2], 16) for i in (1, 3, 5))
+    image = Image.new("RGB", size)
+    draw = ImageDraw.Draw(image)
+    for y in range(size[1]):
+        ratio = y / max(1, size[1] - 1)
+        color = tuple(round(start[index] * (1 - ratio) + end[index] * ratio) for index in range(3))
+        draw.line((0, y, size[0], y), fill=color)
+    return image
 
 
-def build_header() -> Path:
-    canvas = Image.new("RGB", (600, 250), "#102A43")
+def build_hero() -> Path:
+    source = SOURCE_DIR / "medical-ai-hero.png"
+    if not source.exists():
+        raise FileNotFoundError(source)
+
+    canvas = cover(source, (600, 420), focus_x=0.42).convert("RGBA")
+    shade = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    shade_draw = ImageDraw.Draw(shade)
+    for x in range(430):
+        alpha = max(0, round(205 * (1 - x / 430)))
+        shade_draw.line((x, 0, x, 420), fill=(5, 16, 43, alpha))
+    shade_draw.rectangle((0, 0, 600, 420), outline=(63, 228, 243, 80), width=2)
+    canvas = Image.alpha_composite(canvas, shade)
     draw = ImageDraw.Draw(canvas)
 
-    for x, y, radius, color in [
-        (510, 30, 115, "#173D5C"),
-        (565, 165, 90, "#0D666B"),
-        (430, 220, 65, "#184E63"),
-    ]:
-        draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+    draw.rounded_rectangle((34, 31, 202, 62), radius=3, fill="#1DD7E8")
+    draw.text((47, 35), "ETRI 보유 유망기술", font=font(14, True), fill="#071530")
+    draw.text((34, 92), "의료·헬스케어", font=font(37, True), fill="white")
+    draw.text((34, 144), "AI 기술이전", font=font(48, True), fill="#43E4F2")
+    draw.rectangle((35, 218, 293, 220), fill="#37DDEA")
+    draw.text((34, 240), "미래 건강을 예측하고", font=font(18, True), fill="white")
+    draw.text((34, 269), "개인별 최적 관리를 설계하는 기술", font=font(18, True), fill="white")
 
-    nodes = [(410, 55), (486, 92), (548, 60), (445, 150), (530, 188), (385, 205)]
-    for index, start in enumerate(nodes):
-        for end in nodes[index + 1 :]:
-            if abs(start[0] - end[0]) + abs(start[1] - end[1]) < 150:
-                draw.line((*start, *end), fill="#4EA8A8", width=2)
-    for x, y in nodes:
-        draw.ellipse((x - 6, y - 6, x + 6, y + 6), fill="#8EE3DC")
-        draw.ellipse((x - 2, y - 2, x + 2, y + 2), fill="white")
+    tags = ["건강 예측", "예후 분석", "맞춤 계획", "최적 관리"]
+    x = 34
+    for tag in tags:
+        width = draw.textbbox((0, 0), tag, font=font(12, True))[2] + 24
+        draw.rounded_rectangle((x, 325, x + width, 355), radius=15, fill=(11, 42, 80, 220), outline="#47DDEB")
+        draw.text((x + 12, 330), tag, font=font(12, True), fill="#BFF9FF")
+        x += width + 8
+    draw.text((35, 382), "Electronics and Telecommunications Research Institute", font=font(10), fill="#9CB8D2")
 
-    draw.rounded_rectangle((32, 28, 176, 62), radius=17, fill="#00A6A6")
-    draw.text((47, 36), "ETRI TECHNOLOGY", font=load_font(14, True), fill="white")
-    draw.text((32, 85), "의료·헬스케어 AI", font=load_font(35, True), fill="white")
-    draw.text((32, 135), "기업의 다음 서비스를 위한 기술 4선", font=load_font(22, True), fill="#8EE3DC")
-    draw.text((32, 190), "예측  ·  예후  ·  맞춤형 계획  ·  최적 관리", font=load_font(15), fill="#D8E7F2")
-    draw.text((514, 214), "ETRI", font=load_font(18, True), fill="white")
-
-    path = ASSET_DIR / "newsletter-header.png"
-    canvas.save(path, optimize=True)
+    path = ASSET_DIR / "newsletter-hero.png"
+    canvas.convert("RGB").save(path, quality=94, optimize=True)
     return path
 
 
 def build_card(technology: dict[str, str | Path]) -> Path:
-    canvas = Image.new("RGB", (600, 300), "#FFFFFF")
+    width, height = 280, 190
+    shadow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    shadow_draw = ImageDraw.Draw(shadow)
+    shadow_draw.rounded_rectangle((8, 17, 274, 187), radius=11, fill=(0, 0, 0, 105))
+    shadow = shadow.filter(ImageFilter.GaussianBlur(5))
+
+    canvas = Image.new("RGBA", (width, height), (8, 22, 54, 255))
+    canvas = Image.alpha_composite(canvas, shadow)
+
+    card = vertical_gradient((264, 168), str(technology["base"]), str(technology["deep"])).convert("RGBA")
+    card_mask = Image.new("L", card.size, 0)
+    mask_draw = ImageDraw.Draw(card_mask)
+    mask_draw.rounded_rectangle((0, 12, 264, 168), radius=10, fill=255)
+    mask_draw.polygon([(0, 12), (0, 4), (86, 4), (101, 16), (264, 16), (264, 42), (0, 42)], fill=255)
+    canvas.paste(card, (8, 10), card_mask)
+
+    visual = cover(Path(technology["source"]), (112, 168), focus_x=0.5)
+    visual = ImageEnhance.Color(visual).enhance(0.6)
+    visual = ImageEnhance.Contrast(visual).enhance(1.1).convert("RGBA")
+    visual.putalpha(vertical_alpha((112, 168), 30, 205))
+    canvas.alpha_composite(visual, (160, 10))
+
+    gloss = Image.new("RGBA", (264, 168), (0, 0, 0, 0))
+    gloss_draw = ImageDraw.Draw(gloss)
+    gloss_draw.polygon([(0, 0), (264, 0), (264, 34), (0, 86)], fill=(255, 255, 255, 24))
+    canvas.alpha_composite(gloss, (8, 10))
+
     draw = ImageDraw.Draw(canvas)
-    accent = str(technology["accent"])
-    tint = str(technology["tint"])
+    draw.text((22, 25), str(technology["number"]), font=font(15, True), fill="#071630")
+    draw.text((54, 27), str(technology["keyword"]), font=font(9, True), fill="#0B4565")
 
-    visual = cover(Path(technology["source"]), (246, 300))
-    visual = ImageEnhance.Contrast(visual).enhance(0.88)
-    visual = ImageEnhance.Color(visual).enhance(0.72)
-    canvas.paste(visual, (354, 0))
-    overlay = Image.new("RGBA", (246, 300), (16, 42, 67, 28))
-    canvas.paste(overlay, (354, 0), overlay)
+    y = 64
+    for line in str(technology["title"]).splitlines():
+        draw.text((22, y), line, font=font(15, True), fill="white", stroke_width=1, stroke_fill=(0, 51, 80, 90))
+        y += 25
 
-    draw.rectangle((0, 0, 354, 300), fill="#FFFFFF")
-    draw.rectangle((0, 0, 10, 300), fill=accent)
-    draw.polygon([(314, 0), (354, 0), (354, 300), (334, 300)], fill=tint)
-    draw.rounded_rectangle((30, 23, 91, 55), radius=16, fill=accent)
-    draw.text((49, 30), str(technology["number"]), font=load_font(14, True), fill="white")
+    draw.rounded_rectangle((21, 132, 143, 161), radius=14, fill="#081936")
+    draw.text((38, 137), "SMK 자세히 보기  →", font=font(10, True), fill="#B9FAFF")
+    draw.line((8, 177, 272, 177), fill=(72, 231, 242, 180), width=1)
 
-    title_font = load_font(21, True)
-    title_lines = wrap_text(draw, str(technology["title"]), title_font, 274)
-    y = 71
-    for line in title_lines[:3]:
-        draw.text((30, y), line, font=title_font, fill="#102A43")
-        y += 32
-
-    value_font = load_font(13)
-    value_lines = wrap_text(draw, str(technology["value"]), value_font, 284)
-    y = 177
-    for line in value_lines[:2]:
-        draw.text((30, y), line, font=value_font, fill="#40566B")
-        y += 23
-
-    draw.rounded_rectangle((30, 222, 295, 246), radius=12, fill=tint)
-    draw.text((42, 226), str(technology["field"]), font=load_font(12, True), fill=accent)
-    draw.rounded_rectangle((30, 258, 170, 288), radius=15, fill="#102A43")
-    draw.text((49, 264), "SMK 자세히 보기  →", font=load_font(12, True), fill="white")
-
-    path = ASSET_DIR / f"tech-{technology['number']}-card.png"
-    canvas.save(path, optimize=True)
+    path = ASSET_DIR / f"tech-{technology['number']}-folder.png"
+    canvas.convert("RGB").save(path, quality=92, optimize=True)
     return path
+
+
+def vertical_alpha(size: tuple[int, int], left: int, right: int) -> Image.Image:
+    alpha = Image.new("L", size)
+    draw = ImageDraw.Draw(alpha)
+    for x in range(size[0]):
+        value = round(left + (right - left) * x / max(1, size[0] - 1))
+        draw.line((x, 0, x, size[1]), fill=value)
+    return alpha
 
 
 def build_assets() -> list[Path]:
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     for technology in TECHNOLOGIES:
-        source = Path(technology["source"])
-        if not source.exists():
-            raise FileNotFoundError(source)
-    return [build_header(), *(build_card(technology) for technology in TECHNOLOGIES)]
+        if not Path(technology["source"]).exists():
+            raise FileNotFoundError(technology["source"])
+    return [build_hero(), *(build_card(technology) for technology in TECHNOLOGIES)]
 
 
 def image_tag(filename: str, width: int, height: int, alt: str) -> str:
-    src = f"{PUBLIC_BASE}assets/{filename}"
     return (
-        f'<img src="{src}" width="{width}" height="{height}" alt="{alt}" '
+        f'<img src="{PUBLIC_BASE}assets/{filename}" width="{width}" height="{height}" alt="{alt}" '
         f'style="display:block; width:100%; max-width:{width}px; height:auto; margin:0; padding:0; border:0; outline:none; text-decoration:none;">'
     )
 
 
+def card_cell(technology: dict[str, str | Path], side: str) -> str:
+    card = image_tag(
+        f"tech-{technology['number']}-folder.png",
+        280,
+        190,
+        f"{str(technology['title']).replace(chr(10), ' ')} — SMK 자세히 보기",
+    )
+    padding = "0 5px 10px 15px" if side == "left" else "0 15px 10px 5px"
+    return f'''<td width="300" valign="top" style="width:50%; padding:{padding};">
+                    <a data-tech-card="{technology['number']}" href="{technology['url']}" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none;">{card}</a>
+                  </td>'''
+
+
 def build_html() -> Path:
-    card_rows = []
-    for technology in TECHNOLOGIES:
-        card = image_tag(
-            f"tech-{technology['number']}-card.png",
-            600,
-            300,
-            f"{technology['title']} — SMK 자세히 보기",
-        )
-        card_rows.append(
-            f'''              <tr>
-                <td style="padding:0 0 14px 0;">
-                  <a href="{technology['url']}" target="_blank" rel="noopener noreferrer" style="display:block; color:#102a43; text-decoration:none;">{card}</a>
-                </td>
-              </tr>'''
+    hero = image_tag("newsletter-hero.png", 600, 420, "ETRI 의료·헬스케어 AI 기술이전 안내")
+    rows = []
+    for index in range(0, 4, 2):
+        rows.append(
+            "                <tr>\n                  "
+            + card_cell(TECHNOLOGIES[index], "left")
+            + "\n                  "
+            + card_cell(TECHNOLOGIES[index + 1], "right")
+            + "\n                </tr>"
         )
 
-    header = image_tag(
-        "newsletter-header.png",
-        600,
-        250,
-        "ETRI 의료·헬스케어 AI 기술이전 안내",
-    )
     html = f'''<!doctype html>
 <html lang="ko">
   <head>
@@ -221,37 +226,47 @@ def build_html() -> Path:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ETRI 의료·헬스케어 AI 기술이전 안내</title>
   </head>
-  <body style="margin:0; padding:0; background:#eef2f6;">
+  <body style="margin:0; padding:0; background:#e8edf3;">
     <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent;">미래 건강 예측부터 개인 맞춤형 관리까지, ETRI 의료 AI 기술 4종을 확인하세요.</div>
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; margin:0; padding:0; border-collapse:collapse; background:#eef2f6;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; margin:0; border-collapse:collapse; background:#e8edf3;">
       <tr>
         <td align="center" style="padding:24px 0;">
-          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%; max-width:600px; margin:0; border-collapse:collapse; background:#ffffff;">
-            <tr><td style="padding:0;">{header}</td></tr>
+          <table data-design-reference="kist-connect-2026" role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%; max-width:600px; margin:0; border-collapse:collapse; background:#081636;">
+            <tr><td style="padding:0;">{hero}</td></tr>
             <tr>
-              <td style="padding:27px 32px 9px 32px; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; color:#102a43;">
-                <div style="font-size:20px; line-height:1.5; font-weight:700;">의료 AI 기술을 찾고 계신가요?</div>
-                <div style="padding-top:10px; color:#506578; font-size:14px; line-height:1.75;">기업의 디지털 헬스케어 서비스 개발과 고도화에 활용 가능한 ETRI 기술 4종을 소개합니다. 관심 기술의 카드를 눌러 상세 SMK를 확인하세요.</div>
+              <td style="padding:25px 30px 22px 30px; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; background:#081636; color:#ffffff;">
+                <div style="color:#39ddea; font-size:11px; line-height:1.4; letter-spacing:2px; font-weight:700;">ETRI TECHNOLOGY PORTFOLIO</div>
+                <div style="padding-top:7px; font-size:24px; line-height:1.35; font-weight:700;">사업화 가능 기술 4선</div>
+                <div style="padding-top:8px; color:#a9bfd4; font-size:13px; line-height:1.7;">관심 기술 카드를 선택하면 상세 SMK로 이동합니다.</div>
               </td>
             </tr>
             <tr>
-              <td style="padding:20px 0 10px 0;">
+              <td style="padding:0; background:#081636;">
                 <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%; max-width:600px; border-collapse:collapse;">
-{chr(10).join(card_rows)}
+{chr(10).join(rows)}
                 </table>
               </td>
             </tr>
             <tr>
-              <td style="padding:30px 32px 32px 32px; background:#102a43; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; color:#ffffff;">
-                <div style="font-size:19px; line-height:1.5; font-weight:700;">기술이전·사업화 상담</div>
-                <div style="padding-top:8px; color:#d8e7f2; font-size:13px; line-height:1.7;">보유 역량과 사업 방향을 바탕으로 적합한 기술 검토를 지원합니다.</div>
-                <div style="padding-top:17px; font-size:15px; line-height:1.8;">
-                  <a href="mailto:yhj@daraebiz.com" style="color:#8ee3dc; text-decoration:none; font-weight:700;">yhj@daraebiz.com</a>
-                  <span style="color:#6e8da6;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                  <a href="tel:042-716-7084" style="color:#8ee3dc; text-decoration:none; font-weight:700;">042-716-7084</a>
-                </div>
-                <div style="padding-top:18px; color:#8aa2b5; font-size:11px; line-height:1.6;">다래전략사업화센터 대전지사 · ETRI 기술사업화 협력 안내</div>
+              <td style="padding:22px 30px 25px 30px; background:#102750; border-top:1px solid #28466e; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; color:#ffffff;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; border-collapse:collapse;">
+                  <tr>
+                    <td align="center" valign="middle">
+                      <div style="color:#42e0ec; font-size:11px; letter-spacing:1px; font-weight:700;">TECH TRANSFER CONSULTING</div>
+                      <div style="padding-top:5px; font-size:19px; line-height:1.45; font-weight:700;">기술이전·사업화 상담</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="middle" style="padding-top:12px; font-size:13px; line-height:1.8;">
+                      <a href="mailto:yhj@daraebiz.com" style="color:#ffffff; text-decoration:none; font-weight:700;">yhj@daraebiz.com</a><br>
+                      <a href="tel:042-716-7084" style="color:#42e0ec; text-decoration:none; font-weight:700;">042-716-7084</a>
+                    </td>
+                  </tr>
+                </table>
               </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:15px 20px 17px 20px; background:#061129; font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif; color:#718ba7; font-size:10px; line-height:1.6;">다래전략사업화센터 대전지사 · ETRI 보유기술 사업화 협력 안내</td>
             </tr>
           </table>
         </td>
