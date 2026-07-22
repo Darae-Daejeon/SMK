@@ -36,12 +36,25 @@ def main() -> None:
         assert page.locator(".project-link").count() == 4
         assert page.locator("video").count() == 0
         assert page.locator("#expertise").count() == 0
+        hero = page.locator(".etri-hero-title")
+        assert hero.evaluate("el => getComputedStyle(el).whiteSpace") == "nowrap"
+        assert hero.evaluate("el => el.scrollWidth <= el.clientWidth + 2")
+        for index in range(4):
+            title = page.locator(".project-name").nth(index)
+            assert title.evaluate("el => getComputedStyle(el).whiteSpace") == "nowrap"
+            assert title.evaluate("el => el.scrollWidth <= el.clientWidth + 2")
 
         second = page.locator(".project-link").nth(1)
         second.hover(position={"x": 250, "y": 80})
         page.wait_for_timeout(250)
         assert page.locator(".project-preview").get_attribute("data-visible") == "true"
         assert page.locator(".project-preview img").get_attribute("src") == "assets/smk-02.png"
+        assert page.locator(".project-preview").evaluate(
+            "el => Number(getComputedStyle(el).zIndex) > Number(getComputedStyle(document.querySelector('.project-list')).zIndex)"
+        )
+        assert page.locator(".project-preview").evaluate(
+            "el => getComputedStyle(el).backgroundColor === 'rgb(255, 255, 255)'"
+        )
         page.screenshot(path=str(OUT / "hover-tech-02.png"), full_page=False)
 
         mobile = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1)
