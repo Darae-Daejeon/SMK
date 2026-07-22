@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="한국전자통신연구원 의료·헬스케어 인공지능 IP거래 기술목록">
+  <title>ETRI IP거래 기술목록</title>
+  <style>
+    @font-face {
+      font-family: "Humane Local";
+      src: url("assets/humane.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Inter Local";
+      src: url("assets/inter.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    :root {
+      --canvas-width: 800px;
+      --bg: #111111;
+      --ink: #d1d1d1;
+      --paper: #f2f2ed;
+      --line: rgba(255,255,255,.19);
+      --orange: #e9521b;
+      --blue: #0877bd;
+    }
+    * { box-sizing: border-box; }
+    html { background: #262626; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #262626;
+      font-family: "Inter Local", "Noto Sans KR", Arial, sans-serif;
+    }
+    .newsletter {
+      position: relative;
+      width: min(100%, var(--canvas-width));
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: 0 0 50px rgba(0,0,0,.28);
+    }
+    .masthead {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 92px;
+      padding: 25px 30px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .brand img {
+      display: block;
+      width: 78px;
+      height: auto;
+    }
+    .brand span {
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .hero {
+      position: relative;
+      min-height: 720px;
+      padding: 128px 30px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 92px;
+      right: 30px;
+      width: 1px;
+      height: 102px;
+      background: var(--line);
+    }
+    .hero-copy {
+      position: absolute;
+      z-index: 2;
+      top: 215px;
+      right: 30px;
+      width: 176px;
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 650;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+    }
+    .hero-copy span { display: block; }
+    .hero-copy .accent { color: var(--orange); }
+    .wordmark {
+      margin: 0;
+      color: var(--paper);
+      font-family: "Humane Local", "Arial Narrow", sans-serif;
+      font-size: clamp(250px, 51vw, 410px);
+      font-weight: 700;
+      line-height: .68;
+      letter-spacing: -.032em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transform: translateX(-4px);
+    }
+    .hero-index {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-top: 35px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-size: 10px;
+      line-height: 1.35;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .hero-index strong {
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .projects {
+      position: relative;
+      border-top: 1px solid var(--line);
+    }
+    .section-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 30px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-kicker strong {
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .project-list { margin: 0; padding: 0; list-style: none; }
+    .project-item { border-bottom: 1px solid var(--line); }
+    .project-link {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(105px, .65fr) minmax(126px, .65fr);
+      gap: 18px;
+      min-height: 154px;
+      padding: 25px 30px 23px;
+      color: var(--ink);
+      background: transparent;
+      text-decoration: none;
+      transition: color .22s ease, background-color .22s ease;
+    }
+    .project-link:hover,
+    .project-link:focus-visible {
+      color: #111;
+      background: var(--paper);
+      outline: none;
+    }
+    .project-name {
+      align-self: start;
+      color: inherit;
+      font-family: "Inter Local", "Noto Sans KR", Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 760;
+      line-height: 1.18;
+      letter-spacing: -.055em;
+      word-break: keep-all;
+    }
+    .project-meta {
+      align-self: end;
+      font-size: 10px;
+      line-height: 1.45;
+      letter-spacing: -.02em;
+    }
+    .project-meta .label {
+      display: block;
+      margin-bottom: 5px;
+      color: #7d7d7d;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .project-link:hover .project-meta .label,
+    .project-link:focus-visible .project-meta .label { color: #666; }
+    .project-arrow {
+      position: absolute;
+      right: 30px;
+      top: 22px;
+      width: 22px;
+      height: 22px;
+      opacity: 0;
+      transform: translate(-5px, 5px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .project-link:hover .project-arrow,
+    .project-link:focus-visible .project-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    .preview {
+      position: fixed;
+      z-index: 50;
+      width: min(390px, 46vw);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(14px, 14px) scale(.98);
+      transition: opacity .14s ease, transform .14s ease;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.25);
+      box-shadow: 0 18px 45px rgba(0,0,0,.3);
+    }
+    .preview.is-visible { opacity: 1; transform: translate(14px, 14px) scale(1); }
+    .preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 680px) {
+      .masthead { height: 76px; padding: 20px; }
+      .brand img { width: 66px; }
+      .hero { min-height: 570px; padding: 104px 20px 28px; }
+      .hero::before { top: 76px; right: 20px; }
+      .hero-copy { top: 175px; right: 20px; width: 145px; }
+      .wordmark { font-size: clamp(170px, 51vw, 310px); }
+      .section-kicker { padding: 0 20px; }
+      .project-link {
+        grid-template-columns: 1fr 1fr;
+        min-height: 180px;
+        padding: 23px 20px;
+      }
+      .project-name { grid-column: 1 / -1; font-size: 24px; padding-right: 24px; }
+      .preview { display: none; }
+      .project-arrow { opacity: 1; right: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="newsletter">
+    <header class="masthead">
+      <a class="brand" href="https://www.etri.re.kr/" target="_self" aria-label="ETRI 홈페이지">
+        <img src="assets/etri-logo.png" alt="ETRI 한국전자통신연구원">
+        <span>ETRI IP거래 기술목록</span>
+      </a>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy" aria-label="한국전자통신연구원 IP거래 보유기술 목록">
+        <span>한국전자통신연구원</span>
+        <span class="accent">IP거래</span>
+        <span>보유기술</span>
+        <span>기술목록</span>
+      </div>
+      <h1 class="wordmark" id="hero-title">ETRI</h1>
+      <div class="hero-index">
+        <span><strong>01—04</strong><br>Medical AI Technology</span>
+        <span>Technology Transfer<br>IP Portfolio</span>
+      </div>
+    </section>
+
+    <section class="projects" aria-labelledby="projects-title">
+      <div class="section-kicker">
+        <strong id="projects-title">보유기술</strong>
+        <span>SMK 04</span>
+      </div>
+      <ol class="project-list">
+        <li class="project-item">
+          <a class="project-link" href="https://darae-daejeon.github.io/SMK/ETRI/tech-01.html" target="_blank" rel="noopener" data-preview="assets/smk-01.png">
+            <span class="project-name">미래 건강 예측을 위한<br>의료지능 딥러닝 엔진 기술</span>
+            <span class="project-meta"><span class="label">분야</span>의료 인공지능</span>
+            <span class="project-meta"><span class="label">특허출원번호</span>10-2018-0147862</span>
+            <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </li>
+        <li class="project-item">
+          <a class="project-link" href="https://darae-daejeon.github.io/SMK/ETRI/tech-02.html" target="_blank" rel="noopener" data-preview="assets/smk-02.png">
+            <span class="project-name">미래 건강상태 및 예후 예측을 위한<br>헬스케어 인공지능 기술</span>
+            <span class="project-meta"><span class="label">분야</span>확률 기반 예후 예측</span>
+            <span class="project-meta"><span class="label">특허출원번호</span>10-2021-0179326</span>
+            <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </li>
+        <li class="project-item">
+          <a class="project-link" href="https://darae-daejeon.github.io/SMK/ETRI/tech-03.html" target="_blank" rel="noopener" data-preview="assets/smk-03.png">
+            <span class="project-name">개인 맞춤형 건강 관리 프로그램을<br>계획하는 인공지능 헬스케어 기술</span>
+            <span class="project-meta"><span class="label">분야</span>맞춤형 치료계획</span>
+            <span class="project-meta"><span class="label">특허출원번호</span>10-2022-0189362</span>
+            <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </li>
+        <li class="project-item">
+          <a class="project-link" href="https://darae-daejeon.github.io/SMK/ETRI/tech-04.html" target="_blank" rel="noopener" data-preview="assets/smk-04.png">
+            <span class="project-name">미래 건강 상태의 맞춤형 예측 및<br>최적 관리를 위한 인공지능 기술</span>
+            <span class="project-meta"><span class="label">분야</span>예측·최적관리</span>
+            <span class="project-meta"><span class="label">특허출원번호</span>10-2024-0172319</span>
+            <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <div class="preview" aria-hidden="true"><img src="assets/smk-01.png" alt=""></div>
+  <script>
+    (() => {
+      const preview = document.querySelector('.preview');
+      const previewImage = preview.querySelector('img');
+      const links = document.querySelectorAll('.project-link');
+
+      const placePreview = (event) => {
+        const gap = 18;
+        const rect = preview.getBoundingClientRect();
+        let left = event.clientX + gap;
+        let top = event.clientY + gap;
+        if (left + rect.width > window.innerWidth - 12) left = event.clientX - rect.width - gap;
+        if (top + rect.height > window.innerHeight - 12) top = window.innerHeight - rect.height - 12;
+        preview.style.left = `${Math.max(12, left)}px`;
+        preview.style.top = `${Math.max(12, top)}px`;
+      };
+
+      links.forEach((link) => {
+        const show = (event) => {
+          previewImage.src = link.dataset.preview;
+          placePreview(event);
+          preview.classList.add('is-visible');
+        };
+        link.addEventListener('mouseenter', show);
+        link.addEventListener('mousemove', placePreview);
+        link.addEventListener('mouseleave', () => preview.classList.remove('is-visible'));
+        link.addEventListener('focus', () => {
+          const rect = link.getBoundingClientRect();
+          previewImage.src = link.dataset.preview;
+          preview.style.left = `${Math.max(12, rect.right - 405)}px`;
+          preview.style.top = `${Math.max(12, rect.top - 115)}px`;
+          preview.classList.add('is-visible');
+        });
+        link.addEventListener('blur', () => preview.classList.remove('is-visible'));
+      });
+    })();
+  </script>
+</body>
+</html>

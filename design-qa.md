@@ -38,3 +38,34 @@
 ## Final result
 
 passed
+
+---
+
+# ETRI Deadwater-style IP technology list design QA
+
+- Primary reference: `C:\Users\JEON\Documents\기술판매\ETRI\deadwater-newsletter\reference\deadwater.html`
+- Design specification: `C:\Users\JEON\Documents\기술판매\ETRI\deadwater-newsletter\reference\deadwater-design.md`
+- Implementation: `C:\Users\JEON\Documents\기술판매\ETRI\deadwater-newsletter\index.html`
+- Desktop capture: `C:\Users\JEON\Documents\기술판매\tmp\etri-deadwater-newsletter\desktop.png`
+- Hover capture: `C:\Users\JEON\Documents\기술판매\tmp\etri-deadwater-newsletter\hover-tech-02.png`
+- Mobile capture: `C:\Users\JEON\Documents\기술판매\tmp\etri-deadwater-newsletter\mobile.png`
+- Side-by-side comparison: `C:\Users\JEON\Documents\기술판매\tmp\etri-deadwater-newsletter\comparison.png`
+
+## Reference interpretation
+
+- Retain the black editorial canvas, oversized condensed wordmark, fine rules, compact metadata, and inverted row-hover behavior.
+- Limit the page to the source composition before the Expertise section.
+- Replace showreel behavior with SMK image previews and direct technology links.
+
+## Verification
+
+- Desktop canvas: exactly 800 px.
+- Mobile viewport: zero horizontal overflow at 390 px.
+- Four technology links: new-tab targets verified.
+- Hover preview: row 02 loads `smk-02.png` and becomes visible.
+- Zero video elements, zero Expertise section, and zero browser console errors.
+- Automated structural tests: 2 passed.
+
+## Final result
+
+passed
