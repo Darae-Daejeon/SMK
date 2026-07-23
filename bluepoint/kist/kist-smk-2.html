@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KIST 기술설명회 02</title>
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    #section-business-idea {
+  margin-top: -20px; /* 숫자를 조절하여 끌어올리는 정도를 맞추세요 (예: -10px, -30px 등) */
+}
+    :root {
+      --kraken-purple: #7132f5;
+      --purple-dark: #5741d8;
+      --purple-deep: #5b1ecf;
+      --purple-subtle: rgba(133, 91, 251, 0.16);
+      --near-black: #101114;
+      --cool-gray: #686b82;
+      --silver-blue: #9497a9;
+      --border-gray: #dedee5;
+      --soft-line: rgba(104, 107, 130, 0.24);
+      --green: #149e61;
+      --green-dark: #026b3f;
+      --white: #ffffff;
+      --surface: #f7f7fb;
+      --panel: #f2f0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      /* 스크롤 허용 */
+      overflow: auto;
+      background: #eef0f6;
+      color: var(--near-black);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
+
+    .slide-stage {
+      width: 100%;
+      height: 100vh;
+      overflow: auto;
+      /* flex와 margin:auto 조합으로 확대 시에도 좌상단이 잘리지 않고 스크롤 가능하게 처리 */
+      display: flex;
+      padding: 24px;
+    }
+
+    .slide-wrapper {
+      position: relative;
+      margin: auto;
+      width: calc(1600px * var(--slide-scale, 1));
+      height: calc(900px * var(--slide-scale, 1));
+      flex-shrink: 0;
+    }
+
+    .smk-slide {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: rgba(0, 0, 0, 0.08) 0 16px 50px;
+      transform: scale(var(--slide-scale, 1));
+      transform-origin: top left;
+    }
+
+    .slide-header {
+      position: relative;
+      padding: 16px 24px 0;
+    }
+
+    .document-id {
+      position: absolute;
+      top: 10px;
+      right: 24px;
+      color: var(--near-black);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      height: 28px;
+      align-items: flex-end;
+    }
+
+    .slide-tag {
+      display: inline-flex;
+      min-width: 124px;
+      height: 26px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 12px 12px 0 0;
+      background: var(--purple-dark);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .slide-tag.secondary {
+      background: var(--kraken-purple);
+    }
+
+    .hero-box {
+      height: 130px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 26px;
+      align-items: center;
+      padding: 18px 28px 18px 38px;
+      border-top: 5px solid var(--purple-dark);
+      border-radius: 0 0 10px 10px;
+      background: #f9f8ff;
+      box-shadow: rgba(0, 0, 0, 0.03) 0 4px 24px;
+    }
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+    .technology-title {
+      max-width: 100%;
+      margin: 0;
+      color: var(--near-black);
+      font-size: 31px;
+      font-weight: 800;
+      line-height: 1.24;
+      letter-spacing: 0;
+      word-break: keep-all;
+    }
+
+    .technology-subtitle {
+      max-width: 1010px;
+      margin: 8px 0 0;
+      color: var(--cool-gray);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    .researcher-card {
+      min-width: 0;
+      padding-left: 22px;
+      border-left: 1px solid rgba(113, 50, 245, 0.22);
+      text-align: right;
+    }
+
+    .researcher-label {
+      margin-bottom: 6px;
+      color: var(--purple-dark);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .researcher-name-line {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 9px;
+      margin-bottom: 5px;
+    }
+
+    .researcher-name {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .researcher-position {
+      color: var(--cool-gray);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .researcher-email,
+    .researcher-affiliation {
+      margin: 3px 0;
+      color: var(--cool-gray);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 54px;
+      height: 716px;
+      padding: 18px 24px 0;
+    }
+
+    .content-column {
+      display: grid;
+      gap: 12px;
+      height: 100%;
+      align-content: space-between;
+    }
+
+    .section-block {
+      min-width: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 24px;
+      margin: 0 0 5px;
+      padding-bottom: 3px;
+      border-bottom: 2px solid var(--soft-line);
+      color: var(--near-black);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .section-heading::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      border-radius: 50%;
+      background: var(--kraken-purple);
+      box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.72);
+    }
+
+    .classification-table,
+    .ip-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .classification-table th {
+      height: 26px;
+      border-right: 2px solid var(--white);
+      background: var(--purple-dark);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .classification-table th:nth-child(3),
+    .classification-table th:nth-child(4) {
+      background: #7659d5;
+    }
+
+    .classification-table td {
+      height: 32px;
+      border: 1px solid var(--border-gray);
+      border-top: 0;
+      color: #3b3d4a;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .overview-layout,
+    .market-layout,
+    .business-layout,
+    .tech-layout {
+      display: grid;
+      gap: 14px;
+    }
+
+    .overview-layout {
+      grid-template-columns: minmax(0, 1fr) 285px;
+      align-items: stretch;
+    }
+
+    .tech-layout {
+      grid-template-columns: minmax(0, 1fr) 315px;
+      align-items: stretch;
+    }
+
+    .market-layout {
+      grid-template-columns: minmax(0, 1fr) 330px;
+      align-items: stretch;
+    }
+
+    .business-layout {
+      grid-template-columns: minmax(0, 1fr) 354px;
+      align-items: stretch;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #2e3039;
+      font-size: 13.2px;
+      font-weight: 500;
+      line-height: 1.47;
+      word-break: keep-all;
+    }
+
+    .bullet-list li {
+      margin: 0 0 6px;
+      padding-left: 2px;
+    }
+
+    .bullet-list.tight li {
+      margin-bottom: 5px;
+    }
+
+    .keyword-panel {
+      min-height: 106px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      border: 1px solid rgba(113, 50, 245, 0.18);
+      border-radius: 10px;
+      background: #fbfaff;
+    }
+
+    .image-slot {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: rgba(16, 24, 40, 0.04) 0 1px 4px;
+    }
+
+    .image-slot img,
+    .business-application-images img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .keyword-panel .image-slot {
+      width: 100%;
+      height: 100%;
+      min-height: 92px;
+    }
+
+    .keyword-search-badge {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 152px;
+      height: 30px;
+      justify-content: center;
+      padding: 0 13px;
+      border: 2px solid rgba(104, 107, 130, 0.58);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--near-black);
+      font-size: 13px;
+      font-weight: 800;
+      transform: translateX(-50%);
+      box-shadow: rgba(16, 24, 40, 0.08) 0 2px 8px;
+    }
+
+    .keyword-search-icon {
+      width: 17px;
+      height: 17px;
+      color: var(--purple-dark);
+      stroke-width: 2.6;
+    }
+
+    .tech-image-slot {
+      height: 142px;
+    }
+
+    .tech-image-slot img {
+      object-fit: contain;
+    }
+
+    .market-image-slot {
+      height: 140px;
+    }
+
+    .market-chart-panel {
+      min-width: 0;
+    }
+
+    .market-chart-source {
+      margin: 4px 0 0;
+      color: rgba(104, 107, 130, 0.68);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .caption-text {
+      margin-top: 3px;
+      color: var(--cool-gray);
+      font-size: 10px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .caption-text:empty {
+      display: none;
+    }
+
+    .business-application-images {
+      --business-image-count: 2;
+      display: grid;
+      grid-template-columns: repeat(var(--business-image-count), minmax(0, 1fr));
+      gap: 6px;
+      height: 112px;
+    }
+
+    .business-application-images img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      background: #ffffff;
+
+
+      object-fit: contain;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    .business-application-images[data-image-count="1"] {
+      --business-image-count: 1;
+    }
+
+    .business-application-images[data-image-count="2"] {
+      --business-image-count: 2;
+    }
+
+    .business-application-images[data-image-count="3"] {
+      --business-image-count: 3;
+    }
+
+    .business-application-images img[hidden] {
+      display: none;
+    }
+
+    .business-idea-box {
+      margin-top: 8px;
+      padding: 12px 16px;
+      border: 1px solid rgba(113, 50, 245, 0.22);
+      border-radius: 8px;
+      background: #fbfaff;
+    }
+
+    .business-idea-box-title {
+      margin: 0 0 7px;
+      color: var(--purple-dark);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .business-idea-box .bullet-list {
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+
+    .comparison-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr);
+      min-height: 150px;
+      overflow: hidden;
+      border: 2px solid rgba(113, 50, 245, 0.34);
+      border-radius: 8px;
+      background: #f8f7ff;
+    }
+
+    .comparison-side {
+      padding: 14px 20px 12px;
+    }
+
+    .comparison-title {
+      margin: 0 0 9px;
+      color: var(--near-black);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .comparison-side .bullet-list {
+      font-size: 12.2px;
+      line-height: 1.44;
+    }
+
+    .comparison-chevron {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: visible;
+    }
+
+    .comparison-chevron::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 138px;
+      background: linear-gradient(90deg, var(--purple-dark), var(--kraken-purple));
+      clip-path: polygon(0 0, 58% 0, 100% 50%, 58% 100%, 0 100%, 34% 50%);
+      box-shadow: rgba(87, 65, 216, 0.18) 0 10px 24px;
+      transform: translateX(-50%);
+    }
+
+    .comparison-arrow-icon {
+      position: relative;
+      z-index: 1;
+      width: 48px;
+      height: 48px;
+      color: #ffffff;
+      filter: drop-shadow(0 5px 12px rgba(16, 17, 20, 0.22));
+      stroke-width: 2.4;
+      transform: translateX(13px);
+    }
+
+    .maturity-scale {
+      --active-index: 4;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(9, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .maturity-scale[data-level="1"] {
+      --active-index: 1;
+    }
+
+    .maturity-scale[data-level="2"] {
+      --active-index: 2;
+    }
+
+    .maturity-scale[data-level="3"] {
+      --active-index: 3;
+    }
+
+    .maturity-scale[data-level="4"] {
+      --active-index: 4;
+    }
+
+    .maturity-scale[data-level="5"] {
+      --active-index: 5;
+    }
+
+    .maturity-scale[data-level="6"] {
+      --active-index: 6;
+    }
+
+    .maturity-scale[data-level="7"] {
+      --active-index: 7;
+    }
+
+    .maturity-scale[data-level="8"] {
+      --active-index: 8;
+    }
+
+    .maturity-scale[data-level="9"] {
+      --active-index: 9;
+    }
+
+    .maturity-item {
+      position: relative;
+      display: grid;
+      grid-template-rows: 16px 42px;
+      gap: 2px;
+      align-items: end;
+      text-align: center;
+    }
+
+    .maturity-number {
+      color: var(--near-black);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .maturity-bars {
+      position: relative;
+      width: 100%;
+      height: 42px;
+      align-self: end;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(104, 107, 130, 0.32);
+
+      background-image: linear-gradient(to top,
+          rgba(148, 151, 169, 0.24) 0 2px,
+          transparent 2px 5px);
+      background-size: 100% 5px;
+      background-repeat: repeat-y;
+      background-position: left bottom;
+    }
+
+    .maturity-fill {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 0;
+
+      height: calc(var(--bar-level) * 5px - 3px);
+      min-height: 2px;
+
+      background-image: linear-gradient(to top,
+          var(--purple-dark) 0 2px,
+          transparent 2px 5px);
+      background-size: 100% 5px;
+      background-repeat: repeat-y;
+      background-position: left bottom;
+    }
+
+    .maturity-marker {
+      position: absolute;
+      z-index: 3;
+      bottom: 8px;
+      left: calc(100% / 18);
+      width: 34px;
+      height: 34px;
+      color: #ffffff;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 5px 12px rgba(87, 65, 216, 0.34));
+      pointer-events: none;
+    }
+
+    .maturity-marker-icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .maturity-marker-bg {
+      fill: var(--kraken-purple);
+      stroke: #ffffff;
+      stroke-width: 2.5;
+    }
+
+    .maturity-marker-check {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .maturity-scale[data-level="1"] .maturity-marker {
+      left: calc(100% * 1 / 18);
+    }
+
+    .maturity-scale[data-level="2"] .maturity-marker {
+      left: calc(100% * 3 / 18);
+    }
+
+    .maturity-scale[data-level="3"] .maturity-marker {
+      left: calc(100% * 5 / 18);
+    }
+
+    .maturity-scale[data-level="4"] .maturity-marker {
+      left: calc(100% * 7 / 18);
+    }
+
+    .maturity-scale[data-level="5"] .maturity-marker {
+      left: calc(100% * 9 / 18);
+    }
+
+    .maturity-scale[data-level="6"] .maturity-marker {
+      left: calc(100% * 11 / 18);
+    }
+
+    .maturity-scale[data-level="7"] .maturity-marker {
+      left: calc(100% * 13 / 18);
+    }
+
+    .maturity-scale[data-level="8"] .maturity-marker {
+      left: calc(100% * 15 / 18);
+    }
+
+    .maturity-scale[data-level="9"] .maturity-marker {
+      left: calc(100% * 17 / 18);
+    }
+
+    .maturity-scale[data-level="1"] .maturity-item:nth-child(1) .maturity-fill,
+    .maturity-scale[data-level="2"] .maturity-item:nth-child(2) .maturity-fill,
+    .maturity-scale[data-level="3"] .maturity-item:nth-child(3) .maturity-fill,
+    .maturity-scale[data-level="4"] .maturity-item:nth-child(4) .maturity-fill,
+    .maturity-scale[data-level="5"] .maturity-item:nth-child(5) .maturity-fill,
+    .maturity-scale[data-level="6"] .maturity-item:nth-child(6) .maturity-fill,
+    .maturity-scale[data-level="7"] .maturity-item:nth-child(7) .maturity-fill,
+    .maturity-scale[data-level="8"] .maturity-item:nth-child(8) .maturity-fill,
+    .maturity-scale[data-level="9"] .maturity-item:nth-child(9) .maturity-fill {
+      background:
+        repeating-linear-gradient(to top,
+          var(--kraken-purple) 0,
+          var(--kraken-purple) 3px,
+          transparent 3px,
+          transparent 5px);
+    }
+
+    .maturity-note {
+      margin: 10px 0 0;
+      color: #30323b;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ip-table th {
+      height: 22px;
+      border: 1px solid var(--white);
+      background: #ebe9f5;
+      color: var(--near-black);
+      font-size: 11.5px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .ip-table td {
+      min-height: 38px;
+      padding: 4px 6px;
+      border: 1px solid var(--border-gray);
+      color: #2f313a;
+      font-size: 10.5px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .ip-table td:nth-child(2) {
+      text-align: center;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .slide-stage {
+        width: 297mm;
+        height: 210mm;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .slide-wrapper {
+        width: 1600px;
+        height: 900px;
+        margin: 0;
+        overflow: hidden;
+        zoom: 0.72;
+      }
+
+      .slide-track {
+        width: 1600px;
+        height: 900px;
+        transform: none !important;
+        transform-origin: top left;
+        transition: none !important;
+      }
+
+      .slide-track .smk-slide:not(:first-child) {
+        display: none !important;
+      }
+
+      .smk-slide {
+        box-shadow: none;
+        transform: none !important;
+      }
+
+      .stage-nav-button,
+      .zoom-controls {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="slide-stage" aria-label="SMK 16:9 기술소개 장표">
+    <div class="slide-wrapper" id="slide-wrapper">
+      <article class="smk-slide" id="smk-slide">
+        <header class="slide-header" id="slide-header">
+          <div class="document-id" id="document-id">| 2026 차세대 전지 기술이전 유망기술 설명회 |</div>
+          <div class="tag-list" id="tag-list" aria-label="기술 태그">
+            <span class="slide-tag primary" id="tag-primary">02</span>
+          </div>
+          <section class="hero-box" id="hero-box" aria-label="기술명 및 연구책임자 정보">
+            <div class="hero-copy" id="hero-copy">
+              <h1 class="technology-title" id="technology-title">중고온용 Ce-Hydrogen phosphate-PBI 고분자 분리막 제조 방법 및 연료전지 응용</h1>
+              <p class="technology-subtitle" id="technology-subtitle">
+                세계 최초 자가조립 세륨포스페이트 네트워크를 적용해 250℃ 무가습 구동, 세계 최고 수준 출력, 5,000시간 내구성을 동시에 입증한 중·고온형 PEM 연료전지 핵심 전해질막·전극 기술
+              </p>
+            </div>
+            <aside class="researcher-card" id="researcher-card">
+              <div class="researcher-label" id="researcher-label">연구책임자</div>
+              <div class="researcher-name-line" id="researcher-name-line">
+                <strong class="researcher-name" id="researcher-name">이 소 영</strong>
+                <span class="researcher-position" id="researcher-position">책임연구원</span>
+              </div>
+              <p class="researcher-affiliation" id="researcher-affiliation">수소ㆍ연료전지연구단</p>
+            </aside>
+          </section>
+        </header>
+
+        <div class="content-grid" id="content-grid">
+          <div class="content-column left-column" id="left-column">
+            <section class="section-block classification-section" id="section-classification">
+              <h2 class="section-heading" id="section-classification-title">기술활용영역 분류/활용 분야</h2>
+              <table class="classification-table" id="classification-table" aria-label="기술활용영역 분류표">
+                <colgroup>
+                  <col style="width: 25%;">
+                  <col style="width: 25%;">
+                  <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th id="classification-header-major">대분류</th>
+                    <th id="classification-header-middle">중분류</th>
+                    <th id="classification-header-small">소분류</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="classification-major">에너지·환경</td>
+                    <td id="classification-middle">고분자전해질 연료전지(PEMFC)</td>
+                    <td id="classification-small">중·고온형(100~300℃) PBI계 전해질막·전극·MEA용 이온전도 네트워크 소재</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="section-block overview-section" id="section-overview">
+              <h2 class="section-heading" id="section-overview-title">기술개요 및 개발배경</h2>
+              <div class="overview-layout" id="overview-layout">
+                <ul class="bullet-list" id="overview-list">
+                  <li id="overview-bullet-1">
+                    자가조립 CeHP 나노섬유 네트워크를 적용해 300℃급 고온에서도 양성자 전달을 안정적으로 유지하는 PBI 기반 전해질막·전극·MEA 기술
+                  </li>
+                  <li id="overview-bullet-2">
+                    고온 구동용 연료전지 핵심소재인 상용 PFSA와 기존 PBI계 막 모두 200℃ 이상 장기 운전에 한계
+                  </li>
+                </ul>
+                <div class="keyword-panel" id="overview-keyword-panel">
+                  <div class="keyword-content-wrapper"
+                    style="width: 100%; height: 100%; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative;">
+                    <span class="keyword-search-badge" style="position: static; transform: none; margin-bottom: 4px;"
+                      aria-hidden="true">
+                      <svg class="keyword-search-icon lucide lucide-search" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                      </svg>
+                      <span>Core Keyword</span>
+                    </span>
+                    <div class="hashtag-container"
+                      style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; color: var(--cool-gray); font-size: 14px; font-weight: 700; text-align: center; word-break: keep-all;">
+                      <span class="hashtag">#무가습 운전</span>
+                      <span class="hashtag">#자가조립 네트워크</span>
+                      <span class="hashtag">#PBI기반 고분자</span>
+                      <span class="hashtag">#고출력 장수명</span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block tech-content-section" id="section-tech-content">
+              <h2 class="section-heading" id="section-tech-content-title">기술내용 및 대표이미지</h2>
+              <div class="tech-layout" id="tech-content-layout">
+                <div>
+                  <ul class="bullet-list" id="tech-content-list">
+                    <li id="tech-content-bullet-1">
+                      자가조립 CeHP 나노섬유 네트워크를 적용해 300℃급 고온에서도 양성자 전달을 안정적으로 유지하는 중·고온형 PBI 기반 전해질막·전극·MEA 기술
+                    </li>
+                    <li id="tech-content-bullet-2">
+                      250℃ 무가습 조건에서 고전도도(0.414 S/cm), 고출력(최대 2.35 W/cm²), 장기 내구성(5,000시간 이상), CO 내성까지 확보한 차세대 연료전지 핵심소재 기술
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="image-slot tech-image-slot" id="tech-representative-image-slot">
+                    <div class="image-slot tech-image-slot" id="tech-representative-image-slot">
+                      <img id="tech-representative-image" class="representative-image" alt="대표이미지"
+                        src="./img/05/present_img.jpg">
+                    </div>
+                  </div>
+                  <p class="caption-text" id="tech-representative-caption"></p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block limit-improvement-section" id="section-limit-improvement">
+              <h2 class="section-heading" id="section-limit-improvement-title">기술 한계점 VS 개선점</h2>
+              <div class="comparison-panel" id="comparison-panel">
+                <div class="comparison-side as-is" id="comparison-as-is">
+                  <h3 class="comparison-title" id="comparison-as-is-title">[ 기존기술한계점 ]</h3>
+                  <ul class="bullet-list tight" id="comparison-as-is-list">
+                    <li id="comparison-as-is-bullet-1">기존 전해질막은 200℃ 이상 고온 운전에서 전도도와 내구성 확보에 한계</li>
+                    <li id="comparison-as-is-bullet-2">고온에서 인산 플러딩과 촉매 피독이 발생해 전극 반응성 유지가 어렵고, 200℃ 이상 적용 가능한 소재 조합 부족</li>
+                  </ul>
+                </div>
+                <div class="comparison-chevron" id="comparison-chevron" aria-hidden="true">
+                  <svg id="comparison-arrow-icon" class="comparison-arrow-icon lucide lucide-circle-arrow-right"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 12h8"></path>
+                    <path d="m12 16 4-4-4-4"></path>
+                  </svg>
+                </div>
+                <div class="comparison-side to-be" id="comparison-to-be">
+                  <h3 class="comparison-title" id="comparison-to-be-title">[ 개발기술개선점 ]</h3>
+                  <ul class="bullet-list tight" id="comparison-to-be-list">
+                    <li id="comparison-to-be-bullet-1">
+                      SAN-CeHP 네트워크로 250℃ 무가습 환경에서도 안정적인 이온전달과 세계 최고 수준 출력 구현
+                    </li>
+                    <li id="comparison-to-be-bullet-2">
+                    one-pot 대면적 공정으로 생산성과 분산성을 높이고, 기계적 강도·유연성 향상과 원가 절감 가능
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="content-column right-column" id="right-column">
+            <section class="section-block market-trend-section" id="section-market-trend">
+              <h2 class="section-heading" id="section-market-trend-title">관련시장동향</h2>
+              <div class="market-layout" id="market-trend-layout">
+                <ul class="bullet-list" id="market-trend-list">
+                  <li id="market-trend-bullet-1">
+                    국내 UAM 시장은 25년 3,292만 달러에서 40년까지 약 10억달러로 전망 - CAGR 25.6%
+                  </li>
+                  <li id="market-trend-bullet-2">
+                    K-UAM 그랜드챌린지를 통해 실증 데이터와 인프라를 민간에 제공하고 초기 상용 노선 도입을 추진 중으로, 경량·고효율 전원 솔루션을 확보한 기업에 유리한 진입 환경이 조성 중
+                  </li>
+
+                </ul>
+                <div class="market-chart-panel" id="market-chart-panel">
+                  <div class="image-slot market-image-slot" id="market-trend-image-slot">
+                    <canvas id="marketChart"></canvas>
+                  </div>
+                  <p class="market-chart-source" id="market-chart-source">&lt;항공정보포털시스템&gt;</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-block business-idea-section" id="section-business-idea">
+              <h2 class="section-heading" id="section-business-idea-title">Business Idea / 응용·적용분야</h2>
+              <div class="business-layout" id="business-idea-layout">
+                <ul class="bullet-list" id="business-idea-list">
+                  <li id="business-idea-bullet-1">산업분야: 도심항공모빌리티(UAM)/수소드론·장기체공 UAV/군수·방산 전원</li>
+                  <li id="business-idea-bullet-2">관련시장:
+                    K-UAM/항공용 수소 파워팩/고온형 PEMFC 스택
+                  </li>
+                  <li id="business-idea-bullet-2">적용가능한 제품:
+                    eVTOL 보조전원 모듈/장기체공 수소 UAV 파워팩/고온형 MEA 업그레이드 키트
+                  </li>
+                </ul>
+                <div class="business-application-images" id="business-application-images" data-image-count="2">
+                  <img id="business-image-1" class="business-image" alt="응용·적용분야 이미지 1" src="./img/05/idea_img1.png">
+                  <img id="business-image-2" class="business-image" alt="응용·적용분야 이미지 2" src="./img/05/idea_img2.jpg">
+                </div>
+              </div>
+              <div class="business-idea-box" id="business-idea-box">
+                <h3 class="business-idea-box-title" id="business-idea-box-title">사업화 제안 포인트</h3>
+                <ul class="bullet-list tight" id="business-idea-box-list">
+                  <li id="business-idea-box-bullet-1">
+                    기존 제품을 80~180℃급에서 200~250℃급으로 고도화하는 프리미엄 포지셔닝
+                  </li>
+                  <li id="business-idea-box-bullet-2">
+                    UAM 항공·드론 기업에 경량 고온형 파워팩 모듈 공급 + 교체용 막·전극 반복매출
+
+                  </li>
+                  <li id="business-idea-box-bullet-3">
+                    막·전극 소재 공급 + MEA 가공/양산 + 교체주기 기반 애프터마켓의 복합형 구조
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="section-block maturity-section" id="section-maturity">
+              <h2 class="section-heading" id="section-maturity-title">기술성숙도</h2>
+              <div class="maturity-scale" id="maturity-scale" data-level="5" aria-label="기술성숙도 5단계">
+                <div class="maturity-item" id="maturity-item-1" style="--bar-level: 1;"><span class="maturity-number"
+                    id="maturity-number-1">1</span><span class="maturity-bars" id="maturity-bars-1"><span
+                      class="maturity-fill" id="maturity-fill-1"></span></span></div>
+                <div class="maturity-item" id="maturity-item-2" style="--bar-level: 2;"><span class="maturity-number"
+                    id="maturity-number-2">2</span><span class="maturity-bars" id="maturity-bars-2"><span
+                      class="maturity-fill" id="maturity-fill-2"></span></span></div>
+                <div class="maturity-item" id="maturity-item-3" style="--bar-level: 3;"><span class="maturity-number"
+                    id="maturity-number-3">3</span><span class="maturity-bars" id="maturity-bars-3"><span
+                      class="maturity-fill" id="maturity-fill-3"></span></span></div>
+                <div class="maturity-item" id="maturity-item-4" style="--bar-level: 4;"><span class="maturity-number"
+                    id="maturity-number-4">4</span><span class="maturity-bars" id="maturity-bars-4"><span
+                      class="maturity-fill" id="maturity-fill-4"></span></span></div>
+                <div class="maturity-item" id="maturity-item-5" style="--bar-level: 5;"><span class="maturity-number"
+                    id="maturity-number-5">5</span><span class="maturity-bars" id="maturity-bars-5"><span
+                      class="maturity-fill" id="maturity-fill-5"></span></span></div>
+                <div class="maturity-item" id="maturity-item-6" style="--bar-level: 6;"><span class="maturity-number"
+                    id="maturity-number-6">6</span><span class="maturity-bars" id="maturity-bars-6"><span
+                      class="maturity-fill" id="maturity-fill-6"></span></span></div>
+                <div class="maturity-item" id="maturity-item-7" style="--bar-level: 7;"><span class="maturity-number"
+                    id="maturity-number-7">7</span><span class="maturity-bars" id="maturity-bars-7"><span
+                      class="maturity-fill" id="maturity-fill-7"></span></span></div>
+                <div class="maturity-item" id="maturity-item-8" style="--bar-level: 8;"><span class="maturity-number"
+                    id="maturity-number-8">8</span><span class="maturity-bars" id="maturity-bars-8"><span
+                      class="maturity-fill" id="maturity-fill-8"></span></span></div>
+                <div class="maturity-item" id="maturity-item-9" style="--bar-level: 9;"><span class="maturity-number"
+                    id="maturity-number-9">9</span><span class="maturity-bars" id="maturity-bars-9"><span
+                      class="maturity-fill" id="maturity-fill-9"></span></span></div>
+                <span class="maturity-marker" id="maturity-marker" aria-hidden="true">
+                  <svg id="maturity-marker-icon" class="maturity-marker-icon lucide lucide-circle-check"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle class="maturity-marker-bg" cx="12" cy="12" r="10"></circle>
+                    <path class="maturity-marker-check" d="m9 12 2 2 4-4"></path>
+                  </svg>
+                </span>
+              </div>
+              <p class="maturity-note" id="maturity-note">TRL 5 : 확정된 공법/재료/시스템의 실험실 시제품 제작 및 성능 평가가 완료된 단계
+              </p>
+            </section>
+
+            <section class="section-block ip-portfolio-section" id="section-ip-portfolio">
+              <h2 class="section-heading" id="section-ip-portfolio-title">IP Portfolio</h2>
+              <table class="ip-table" id="ip-table" aria-label="IP Portfolio 표">
+                <colgroup>
+                  <col style="width: 40%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th id="ip-table-header-title">발명의 명칭</th>
+                    <th id="ip-table-header-application">출원번호</th>
+                    <th id="ip-table-header-date">출원일자</th>
+                    <th id="ip-table-header-registration">등록번호</th>
+                    <th id="ip-table-header-registration-date">등록일자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="ip-row-1-title">
+                      중고온형 고분자 전해질막 연료전지용 전극, 및 이를 포함하는 막-전극 접합체
+                    </td>
+                    <td id="ip-row-1-application">
+                      10-2025-0077597
+                    </td>
+                    <td id="ip-row-1-date">
+                      2025.06.13
+                    </td>
+                    <td id="ip-row-1-registration">미공개</td>
+                    <td id="ip-row-1-registration-date">-</td>
+                  </tr>
+                  <tr>
+                    <td id="ip-row-1-title">
+                      중·고온형 고분자 전해질막, 이의 제조방법 및 이를 포함하는 고온형 고분자 전해질 연료전지
+                    </td>
+                    <td id="ip-row-1-application">
+                      10-2019-0128609
+                    </td>
+                    <td id="ip-row-1-date">
+                      2019.10.16
+                    </td>
+                    <td id="ip-row-1-registration">
+                      10-2238598
+                    </td>
+                    <td id="ip-row-1-registration-date">
+                      2021.04.05
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+          </div>
+        </div>
+      </article>
+    </div>
+
+  </main>
+
+  <script>
+    (function () {
+      const slide = document.getElementById("smk-slide");
+      const designWidth = 1600;
+      const designHeight = 900;
+
+      let currentScale = 1;
+      let isManualZoom = false; // 사용자가 수동으로 줌을 조작했는지 여부 기록
+
+      function applyScale(scale) {
+        currentScale = scale;
+        document.documentElement.style.setProperty("--slide-scale", scale.toString());
+      }
+
+
+      // 화면 크기에 맞게 자동 조정
+      function fitSlide() {
+        if (isManualZoom) return;
+
+        const padding = 48;
+        const scale = Math.min(
+          (document.documentElement.clientWidth - padding) / designWidth,
+          (document.documentElement.clientHeight - padding) / designHeight
+        );
+        applyScale(Math.max(scale, 0.1));
+      }
+
+      // 수동 확대/축소 로직 (20% ~ 400% 사이로 제한)
+      window.manualZoom = function (delta) {
+        isManualZoom = true;
+        let newScale = currentScale + delta;
+        newScale = Math.max(0.2, Math.min(newScale, 4.0));
+        applyScale(newScale);
+      };
+
+      // 화면 맞춤 리셋 로직
+      window.resetZoom = function () {
+        isManualZoom = false;
+        fitSlide();
+      };
+
+      // Ctrl + 마우스 휠 (혹은 트랙패드 확대/축소) 동작 매핑
+      document.addEventListener('wheel', function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault(); // 브라우저 기본 줌 방지
+          if (e.deltaY < 0) {
+            window.manualZoom(0.1); // 위로 스크롤 (확대)
+          } else {
+            window.manualZoom(-0.1); // 아래로 스크롤 (축소)
+          }
+        }
+      }, { passive: false });
+
+      function syncPromotionHotspots() {
+        document.querySelectorAll(".promotion-link-map").forEach((map) => {
+          const baseWidth = Number(map.dataset.baseWidth) || 600;
+          const baseHeight = Number(map.dataset.baseHeight) || 320;
+
+          map.querySelectorAll(".promotion-hotspot").forEach((spot) => {
+            const x = Number(spot.dataset.x) || 0;
+            const y = Number(spot.dataset.y) || 0;
+            const w = Number(spot.dataset.w) || 0;
+            const h = Number(spot.dataset.h) || 0;
+
+            spot.style.left = `${(x / baseWidth) * 100}%`;
+            spot.style.top = `${(y / baseHeight) * 100}%`;
+            spot.style.width = `${(w / baseWidth) * 100}%`;
+            spot.style.height = `${(h / baseHeight) * 100}%`;
+          });
+        });
+      }
+
+      function syncBusinessImageCount() {
+        const gallery = document.getElementById("business-application-images");
+        const visibleImages = gallery.querySelectorAll("img:not([hidden])").length;
+        gallery.dataset.imageCount = String(Math.min(Math.max(visibleImages, 1), 3));
+      }
+
+      window.addEventListener("resize", fitSlide);
+      window.addEventListener("resize", syncPromotionHotspots);
+
+      // 초기 로딩 시 화면에 맞춤
+      fitSlide();
+      syncBusinessImageCount();
+      syncPromotionHotspots();
+    })();
+    // ... 기존 코드 유지 (fitSlide, syncPromotionHotspots 등) ...
+
+    // ▼ 여기서부터 차트 생성 코드 추가 ▼
+    function renderMarketChart() {
+      const ctx = document.getElementById('marketChart');
+      if (!ctx) return;
+
+      // X축 라벨 설정
+      const labels = ["'25", "'26", "'27", "'28", "'29", "'30","'31", "'32", "'33", "'34", "'35", "'36", "'37", "'38", "'39", "'40"];
+
+      // 데이터 계산 로직
+      const startValue = 32.92;
+      const endValue = 1000;
+      const cagr = 0.256;
+
+      const dataPoints = labels.map((_, index) => {
+        if (index === 0) return startValue;
+        if (index === labels.length - 1) return endValue;
+        return parseFloat((startValue * Math.pow(1 + cagr, index)).toFixed(1));
+      });
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Market Size (Million USD)',
+            data: dataPoints,
+            backgroundColor: '#7132f5', // --kraken-purple
+            borderRadius: 4,
+            barPercentage: 0.6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false // 범례 숨김
+            },
+            tooltip: {
+              backgroundColor: '#101114',
+              titleFont: { family: 'Pretendard Variable' },
+              bodyFont: { family: 'Pretendard Variable' },
+              callbacks: {
+                label: function (context) {
+                  return context.parsed.y + 'M USD';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { family: 'Pretendard Variable', size: 11, weight: '600' },
+                color: '#686b82'
+              }
+            },
+            y: {
+              border: { display: false },
+              grid: {
+                color: 'rgba(104, 107, 130, 0.1)',
+                drawTicks: false,
+              },
+              ticks: {
+                font: { family: 'Pretendard Variable', size: 11 },
+                color: '#9497a9',
+                stepSize: 200,
+                callback: function (value) {
+                  return value;
+                }
+              },
+              title: {
+                display: true,
+                text: 'Million USD',
+                color: '#9497a9',
+                font: { family: 'Pretendard Variable', size: 10, weight: '600' }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // 차트 실행 함수 호출
+    renderMarketChart();
+  </script>
+</body>
+
+</html>
