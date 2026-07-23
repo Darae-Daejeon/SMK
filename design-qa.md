@@ -41,6 +41,52 @@ passed
 
 ---
 
+# Catholic SMK researcher-card KIST alignment design QA
+
+- Source visual truth: `C:\Users\JEON\Documents\기술판매\tmp\kist-researcher-reference.png`
+- Implementation screenshots:
+  - `C:\Users\JEON\Documents\기술판매\tmp\catholic-smk1-researcher-after.png`
+  - `C:\Users\JEON\Documents\기술판매\tmp\catholic-smk2-researcher-after.png`
+  - `C:\Users\JEON\Documents\기술판매\tmp\catholic-smk3-researcher-after.png`
+- Viewport and capture: 1280 x 720 CSS px, 1280 x 720 output px, 1x density.
+- State: initial desktop view, no hover or focus state.
+
+## Full-view comparison evidence
+
+- KIST and Catholic pages retain the same two-column A4-landscape SMK composition.
+- The researcher card stays aligned to the top-right hero area without overlap or clipping.
+- No unrelated layout, color, image, table, or content changes were introduced.
+
+## Focused region comparison evidence
+
+- Typography matches the KIST card: label 22px/800, name 21px/800, position 15px/600, affiliation 14px/500 with 18.2px line height.
+- All three Catholic pages use the same three-line content hierarchy: `연구책임자`, `{이름} 교수`, `가톨릭대학교 화학과`.
+- The patent title was removed only from the researcher-card affiliation line; IP portfolio content remains unchanged.
+
+## Required fidelity surfaces
+
+- Fonts and typography: KIST sizes and weights matched exactly for all four researcher-card text roles.
+- Spacing and layout rhythm: existing card padding, border, right alignment, gaps, and hero grid retained.
+- Colors and visual tokens: existing Catholic purple and cool-gray tokens retained.
+- Image quality and asset fidelity: no image assets changed.
+- Copy and content: names retained; position normalized to `교수`; affiliation normalized to `가톨릭대학교 화학과`.
+
+## Comparison history
+
+- Initial P1: Catholic label and supporting text were smaller than KIST, and the affiliation line contained the patent title.
+- Fix: copied KIST font-size hierarchy and replaced position/affiliation copy in all three pages.
+- Post-fix evidence: all three browser-rendered cards report 22px, 21px, 15px, and 14px; zero console errors.
+
+## Findings
+
+- No actionable P0, P1, or P2 differences remain in the requested researcher-card scope.
+
+## Final result
+
+passed
+
+---
+
 # ETRI Deadwater-style IP technology list design QA
 
 - Primary reference: `C:\Users\JEON\Documents\기술판매\ETRI\deadwater-newsletter\reference\deadwater.html`
