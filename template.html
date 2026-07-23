@@ -140,7 +140,7 @@
       .researcher-label {
         margin-bottom: 6px;
         color: var(--purple-dark);
-        font-size: 14px;
+        font-size: 22px;
         font-weight: 800;
       }
 
@@ -153,21 +153,20 @@
       }
 
       .researcher-name {
-        font-size: 19px;
+        font-size: 21px;
         font-weight: 800;
       }
 
       .researcher-position {
         color: var(--cool-gray);
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 600;
       }
 
-      .researcher-email,
       .researcher-affiliation {
         margin: 3px 0;
         color: var(--cool-gray);
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 1.3;
       }
@@ -947,11 +946,10 @@
             <aside class="researcher-card" id="researcher-card">
               <div class="researcher-label" id="researcher-label">연구책임자</div>
               <div class="researcher-name-line" id="researcher-name-line">
-                <strong class="researcher-name" id="researcher-name">{{보유기관 또는 연구자명}}</strong>
-                <span class="researcher-position" id="researcher-position">{{직위 또는 보유기술}}</span>
+                <strong class="researcher-name" id="researcher-name">{{연구책임자명}}</strong>
+                <span class="researcher-position" id="researcher-position">{{직책}}</span>
               </div>
-              <p class="researcher-email" id="researcher-email">{{특허출원번호 또는 연락처}}</p>
-              <p class="researcher-affiliation" id="researcher-affiliation">{{소속부서 또는 대표 특허명}}</p>
+              <p class="researcher-affiliation" id="researcher-affiliation">{{보유기관명}} {{소속부서}}</p>
             </aside>
           </section>
         </header>
