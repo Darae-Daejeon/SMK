@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>금속산화물 물분해 촉매 SMK</title>
+    <title>SMK 레퍼런스 템플릿</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -140,7 +140,7 @@
       .researcher-label {
         margin-bottom: 6px;
         color: var(--purple-dark);
-        font-size: 22px;
+        font-size: 14px;
         font-weight: 800;
       }
 
@@ -153,20 +153,21 @@
       }
 
       .researcher-name {
-        font-size: 21px;
+        font-size: 19px;
         font-weight: 800;
       }
 
       .researcher-position {
         color: var(--cool-gray);
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
       }
 
+      .researcher-email,
       .researcher-affiliation {
         margin: 3px 0;
         color: var(--cool-gray);
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         line-height: 1.3;
       }
@@ -438,12 +439,7 @@
       .caption-text:empty {
         display: none;
       }
-
-      #tech-representative-caption {
-        display: none !important;
-      }
-
-      .business-application-images {
+.business-application-images {
         --business-image-count: 2;
         display: grid;
         grid-template-columns: repeat(var(--business-image-count), minmax(0, 1fr));
@@ -791,6 +787,29 @@
         font-family: inherit;
       }
 
+      .reference-placeholder {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        min-height: 88px;
+        padding: 12px;
+        border: 1px dashed rgba(113, 50, 245, 0.36);
+        color: var(--cool-gray);
+        background: #fbfaff;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .tech-image-slot > .reference-placeholder {
+        min-height: 140px;
+      }
+
+      .business-application-images .reference-placeholder {
+        min-height: 0;
+      }
       .representative-image {
         cursor: zoom-in;
       }
@@ -918,20 +937,21 @@
     <main class="slide-stage" aria-label="SMK 16:9 기술소개 장표">
       <article class="smk-slide" id="smk-slide">
         <header class="slide-header" id="slide-header">
-          <div class="document-id" id="document-id">2026년 IP거래 네트워크(IP-LINK)-반도체 · 이차전지 | 가톨릭대학교</div>
+          <div class="document-id" id="document-id">{{행사명 또는 사업명}} | {{보유기관명}}</div>
           <div class="tag-list" id="tag-list" aria-label="기술 태그">
-            <span class="slide-tag primary" id="tag-primary">수소·에너지</span>
-            <span class="slide-tag secondary" id="tag-secondary">물분해 촉매</span>
+            <span class="slide-tag primary" id="tag-primary">{{기술분야}}</span>
+            <span class="slide-tag secondary" id="tag-secondary">{{세부기술}}</span>
           </div>
           <section class="hero-box" id="hero-box" aria-label="기술명 및 연구책임자 정보">
-            <h1 class="technology-title" id="technology-title">저온 단일공정으로 제조 가능한 대면적 금속산화물 물분해 촉매</h1>
+            <h1 class="technology-title" id="technology-title">{{기술명 입력}}</h1>
             <aside class="researcher-card" id="researcher-card">
               <div class="researcher-label" id="researcher-label">연구책임자</div>
               <div class="researcher-name-line" id="researcher-name-line">
-                <strong class="researcher-name" id="researcher-name">이종현</strong>
-                <span class="researcher-position" id="researcher-position">교수</span>
+                <strong class="researcher-name" id="researcher-name">{{보유기관 또는 연구자명}}</strong>
+                <span class="researcher-position" id="researcher-position">{{직위 또는 보유기술}}</span>
               </div>
-              <p class="researcher-affiliation" id="researcher-affiliation">가톨릭대학교 화학과</p>
+              <p class="researcher-email" id="researcher-email">{{특허출원번호 또는 연락처}}</p>
+              <p class="researcher-affiliation" id="researcher-affiliation">{{소속부서 또는 대표 특허명}}</p>
             </aside>
           </section>
         </header>
@@ -951,10 +971,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td id="classification-major">수소 에너지</td>
-                    <td id="classification-middle">수전해 소재</td>
-                    <td id="classification-small">물분해 촉매</td>
-                    <td id="classification-detail">스피넬 금속산화물 필름</td>
+                    <td id="classification-major">{{대분류}}</td>
+                    <td id="classification-middle">{{중분류}}</td>
+                    <td id="classification-small">{{소분류}}</td>
+                    <td id="classification-detail">{{세분류 또는 상세 활용분야}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -964,9 +984,9 @@
               <h2 class="section-heading" id="section-overview-title">기술개요 및 개발배경</h2>
               <div class="overview-layout" id="overview-layout">
                 <ul class="bullet-list" id="overview-list">
-                  <li id="overview-bullet-1">기존 금속산화물 촉매 코팅의 유기 잔해물 제거, 고온 후처리, 나노특성 손실 문제 개선 필요</li>
-                  <li id="overview-bullet-2">수전해 전극용 탄소섬유 기판에 균일한 스피넬 산화물 필름을 저온·단일공정으로 형성할 필요</li>
-                  <li id="overview-bullet-3">그린수소 생산 효율 향상을 위한 저저항·고안정성 OER 촉매 전극 필요</li>
+                  <li id="overview-bullet-1">{{기술개요 1: 기존 기술 또는 시장의 문제}}</li>
+                  <li id="overview-bullet-2">{{기술개요 2: 개발 배경과 해결 방향}}</li>
+                  <li id="overview-bullet-3">{{기술개요 3: 적용 필요성 또는 기대효과}}</li>
                 </ul>
                 <div class="keyword-panel" id="overview-keyword-panel">
                   <div class="keyword-content-wrapper" id="overview-keyword-wrapper">
@@ -977,14 +997,10 @@
                       </svg>
                       <span id="overview-keyword-search-label">Core Keyword</span>
                     </span>
-                    <div class="hashtag-container" id="overview-hashtag-container">
-                      <span class="hashtag">#물분해 촉매</span>
-                      <span class="hashtag">#스피넬 산화물</span>
-                      <span class="hashtag">#탄소섬유 전극</span>
-                      <span class="hashtag">#저온공정</span>
-                      <span class="hashtag">#OER</span>
-                      <span class="hashtag">#수전해</span>
-                    </div>
+                    <div class="hashtag-container" id="overview-hashtag-container"><span>{{핵심키워드 1}}</span>
+                      <span>{{핵심키워드 2}}</span>
+                      <span>{{핵심키워드 3}}</span>
+                      <span>{{핵심키워드 4}}</span></div>
                   </div>
                 </div>
               </div>
@@ -995,9 +1011,9 @@
               <div class="tech-layout" id="tech-content-layout">
                 <div>
                   <ul class="bullet-list" id="tech-content-list">
-                    <li id="tech-content-bullet-1">Co(OH)2 나노시트와 금속 양이온 전구체를 이용해 탄소섬유 기판 위에 스피넬 금속산화물 필름을 형성하는 기술</li>
-                    <li id="tech-content-bullet-2">MnCo3O4(0.01)/CFP 기준 개시전위 1.41V, 10 mA/cm² 전위 1.54V, Rct 25Ω 수준의 OER 성능 확인</li>
-                    <li id="tech-content-bullet-3">3전극 OER 평가, EIS 분석, 10,000초 안정성 시험을 통한 전극 성능 검증</li>
+                    <li id="tech-content-bullet-1">{{기술내용 1: 핵심 구성·공정·소재·작동 방식}}</li>
+                    <li id="tech-content-bullet-2">{{기술내용 2: 대표 성능지표와 비교우위}}</li>
+                    <li id="tech-content-bullet-3">{{기술내용 3: 시험·검증 조건과 결과}}</li>
                   </ul>
                 </div>
                 <div>
@@ -1005,8 +1021,8 @@
                     <img
                       id="tech-representative-image"
                       class="placeholder-image representative-image"
-                      alt="금속산화물 물분해 촉매 전기화학 성능 그래프"
-                      src="assets/smk3/representative.png"
+                      src="{{대표이미지 경로}}"
+                      alt="{{대표이미지 설명}}"
                     >
                   </div>
                 </div>
@@ -1019,8 +1035,8 @@
                 <div class="comparison-side as-is" id="comparison-as-is">
                   <h3 class="comparison-title" id="comparison-as-is-title">[ 기존기술한계점 ]</h3>
                   <ul class="bullet-list tight" id="comparison-as-is-list">
-                    <li id="comparison-as-is-bullet-1">고온 후처리 기반 금속산화물 코팅의 나노입자 성장 및 활성점 손실</li>
-                    <li id="comparison-as-is-bullet-2">유기 바인더·안정화제 사용에 따른 잔해물 제거 공정과 균일 코팅 한계</li>
+                    <li id="comparison-as-is-bullet-1">{{기존기술 한계점 1}}</li>
+                    <li id="comparison-as-is-bullet-2">{{기존기술 한계점 2}}</li>
                   </ul>
                 </div>
                 <div class="comparison-chevron" id="comparison-chevron" aria-hidden="true">
@@ -1033,8 +1049,8 @@
                 <div class="comparison-side to-be" id="comparison-to-be">
                   <h3 class="comparison-title" id="comparison-to-be-title">[ 개발기술개선점 ]</h3>
                   <ul class="bullet-list tight" id="comparison-to-be-list">
-                    <li id="comparison-to-be-bullet-1">저온·수계 단일공정으로 탄소섬유 전극에 스피넬 산화물 필름 직접 형성</li>
-                    <li id="comparison-to-be-bullet-2">Mn 도핑 기반 낮은 개시전위, 낮은 전하이동저항, 10,000초 안정성 확보</li>
+                    <li id="comparison-to-be-bullet-1">{{개발기술 개선점 1}}</li>
+                    <li id="comparison-to-be-bullet-2">{{개발기술 개선점 2}}</li>
                   </ul>
                 </div>
               </div>
@@ -1046,15 +1062,15 @@
               <h2 class="section-heading" id="section-market-trend-title">관련시장동향</h2>
               <div class="market-layout" id="market-trend-layout">
                 <ul class="bullet-list" id="market-trend-list">
-                  <li id="market-trend-bullet-1">글로벌 수전해장치 시장은 2023년 5.2억 달러에서 2030년 637.2억 달러까지 7년간 CAGR 98.9% 성장 전망</li>
-                  <li id="market-trend-bullet-2">그린수소·재생에너지 저장·산업 탈탄소화 수요 확대로 고효율 OER 촉매 및 전극소재 수요 증가</li>
-                  <li id="market-trend-bullet-3">국내 수소경제 정책과 청정수소 인증제 확산에 따른 수전해 핵심부품 국산화 기회 확대</li>
+                  <li id="market-trend-bullet-1">{{시장동향 1: 시장규모·성장률·전망}}</li>
+                  <li id="market-trend-bullet-2">{{시장동향 2: 수요 증가 요인}}</li>
+                  <li id="market-trend-bullet-3">{{시장동향 3: 정책·산업 기회}}</li>
                 </ul>
                 <div class="market-chart-panel" id="market-chart-panel">
                   <div class="image-slot market-image-slot" id="market-trend-image-slot">
                     <canvas id="marketChart" class="market-chart-canvas"></canvas>
                   </div>
-                  <p class="market-chart-source" id="market-chart-source">&lt;Grand View Research&gt;</p>
+                  <p class="market-chart-source" id="market-chart-source">&lt;{{시장자료 출처}}&gt;</p>
                 </div>
               </div>
             </section>
@@ -1063,37 +1079,21 @@
               <h2 class="section-heading" id="section-business-idea-title">Business Idea / 응용·적용분야</h2>
               <div class="business-layout" id="business-idea-layout">
                 <ul class="bullet-list" id="business-idea-list">
-                  <li id="business-idea-bullet-1">산업분야 : 수전해, 그린수소, 전극소재, 에너지플랜트, 촉매소재</li>
-                  <li id="business-idea-bullet-2">관련시장 : 수전해장치, OER 촉매, 금속산화물 전극, 그린수소 생산설비</li>
-                  <li id="business-idea-bullet-3">적용제품 : 수전해 전극, OER 촉매 코팅 전극, MEA/스택 부품, 수소생산 시스템</li>
+                  <li id="business-idea-bullet-1">산업분야 : {{적용 산업분야}}</li>
+                  <li id="business-idea-bullet-2">관련시장 : {{관련시장}}</li>
+                  <li id="business-idea-bullet-3">적용제품 : {{적용제품}}</li>
                 </ul>
                 <div class="business-application-images" id="business-application-images" data-image-count="2">
-                  <img
-                    id="business-image-1"
-                    class="business-image placeholder-image"
-                    alt="수소 생산 시스템 적용제품"
-                    src="assets/smk3/images/hydrogen_system_view.jpg"
-                  >
-                  <img
-                    id="business-image-2"
-                    class="business-image placeholder-image"
-                    alt="수전해 장치 적용제품"
-                    src="assets/smk3/images/electrolyzer_device_view.jpg"
-                  >
-                  <img
-                    id="business-image-3"
-                    class="business-image placeholder-image"
-                    alt="응용·적용분야 이미지 3"
-                    hidden
-                    src="assets/smk3/images/electrolyzer_device_view.jpg"
-                  >
+                  <div class="reference-placeholder" id="business-image-1">적용분야 이미지 1</div>
+                  <div class="reference-placeholder" id="business-image-2">적용분야 이미지 2</div>
+                  
                 </div>
               </div>
               <div class="business-idea-box" id="business-idea-box">
                 <h3 class="business-idea-box-title" id="business-idea-box-title">사업화 제안 포인트</h3>
                 <ul class="bullet-list tight" id="business-idea-box-list">
-                  <li id="business-idea-box-bullet-1">수전해 스택·전극 제조기업 대상 저온 촉매 코팅공정 라이선싱 및 전극소재 공동개발 가능</li>
-                  <li id="business-idea-box-bullet-2">전극기판 선정 → 금속산화물 코팅 → OER 성능검증 → 스택 적용 → 수소생산 설비용 전극 공급 모델 전개</li>
+                  <li id="business-idea-box-bullet-1">{{사업화 제안 포인트 1}}</li>
+                  <li id="business-idea-box-bullet-2">{{사업화 제안 포인트 2}}</li>
                 </ul>
               </div>
             </section>
@@ -1117,7 +1117,7 @@
                   </svg>
                 </span>
               </div>
-              <p class="maturity-note" id="maturity-note">TRL 4단계 : 실험실 제조, 3전극 OER 평가, EIS 분석, 10,000초 안정성 검증 자료 존재</p>
+              <p class="maturity-note" id="maturity-note">TRL {{단계}} : {{현재 검증 수준과 근거자료}}</p>
             </section>
 
             <section class="section-block ip-portfolio-section" id="section-ip-portfolio">
@@ -1135,12 +1135,12 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td id="ip-row-1-no">1</td>
-                    <td id="ip-row-1-title">금속산화물 필름을 형성하는 방법 및 이로부터 제조된 물 분해용 촉매</td>
-                    <td id="ip-row-1-application">10-2021-0072178</td>
-                    <td id="ip-row-1-date">2021.06.03</td>
-                    <td id="ip-row-1-registration">10-2498214</td>
-                    <td id="ip-row-1-registration-date">2023.02.06</td>
+                    <td id="ip-row-1-no">01</td>
+                    <td id="ip-row-1-title">{{발명의 명칭}}</td>
+                    <td id="ip-row-1-application">{{출원번호}}</td>
+                    <td id="ip-row-1-date">{{출원일자}}</td>
+                    <td id="ip-row-1-registration">{{등록번호 또는 상태}}</td>
+                    <td id="ip-row-1-registration-date">{{등록일자}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -1176,7 +1176,7 @@
           const closeButton = document.getElementById("image-lightbox-close");
           let previousBodyOverflow = "";
 
-          if (!representativeImage || !lightbox || !lightboxImage || !closeButton) return;
+          if (!representativeImage || representativeImage.tagName !== "IMG" || !lightbox || !lightboxImage || !closeButton) return;
 
           representativeImage.tabIndex = 0;
           representativeImage.setAttribute("role", "button");
@@ -1229,7 +1229,7 @@
 
         function syncBusinessImageCount() {
           const gallery = document.getElementById("business-application-images");
-          const visibleImages = gallery.querySelectorAll("img:not([hidden])").length;
+          const visibleImages = gallery.querySelectorAll(":scope > :not([hidden])").length;
           gallery.dataset.imageCount = String(Math.min(Math.max(visibleImages, 1), 3));
         }
 
@@ -1237,10 +1237,10 @@
           const canvas = document.getElementById("marketChart");
           if (!canvas) return;
 
-          const labels = ["'23", "'24", "'25", "'26", "'27", "'28", "'29", "'30"];
-          const startValue = 517.8;
-          const endValue = 63723.6;
-          const cagr = 0.9888003125;
+          const labels = ["Y1", "Y2", "Y3", "Y4", "Y5", "Y6", "Y7", "Y8"];
+          const startValue = 10000;
+          const endValue = 20000;
+          const cagr = 0.1040895;
           const dataPoints = labels.map((_, index) => {
             if (index === 0) return startValue;
             if (index === labels.length - 1) return endValue;
@@ -1253,7 +1253,7 @@
               data: {
                 labels,
                 datasets: [{
-                  label: "Market Size (Million USD)",
+                  label: "Template Market Index",
                   data: dataPoints,
                   backgroundColor: "#7132f5",
                   borderRadius: 4,
@@ -1269,7 +1269,7 @@
                     backgroundColor: "#101114",
                     callbacks: {
                       label(context) {
-                        return context.parsed.y.toLocaleString() + "M USD";
+                        return context.parsed.y.toLocaleString() + " index";
                       }
                     }
                   }
@@ -1291,7 +1291,7 @@
                     },
                     title: {
                       display: true,
-                      text: "Million USD",
+                      text: "Index",
                       color: "#9497a9",
                       font: { family: "Pretendard Variable", size: 10, weight: "600" }
                     }
@@ -1342,7 +1342,7 @@
           ctx.translate(12, rect.height / 2 + 28);
           ctx.rotate(-Math.PI / 2);
           ctx.fillStyle = "#9497a9";
-          ctx.fillText("Million USD", 0, 0);
+          ctx.fillText("Index", 0, 0);
           ctx.restore();
         }
 
