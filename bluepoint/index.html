@@ -102,22 +102,39 @@
         border-top: 2px solid var(--ink);
       }
 
-      .category-table {
-        min-width: 760px;
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(180px, 1fr));
+        gap: 12px;
         margin-bottom: 30px;
       }
 
+      .category-section {
+        border-top: 2px solid var(--ink);
+        border-bottom: 1px solid var(--line);
+      }
+
       .category-main {
-        width: 240px;
+        margin: 0;
+        padding: 13px 12px;
+        background: var(--soft);
         color: var(--ink);
+        font-size: 15px;
         font-weight: 800;
         text-align: center;
-        vertical-align: middle;
       }
 
       .category-subfields {
         display: grid;
-        gap: 4px;
+        gap: 7px;
+        padding: 14px 12px 16px;
+      }
+
+      .category-subfield {
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.4;
+        word-break: keep-all;
       }
 
       th,
@@ -201,6 +218,16 @@
         header {
           padding-top: 36px;
         }
+
+        .category-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .category-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -219,78 +246,58 @@
         <span class="count">총 9건</span>
       </div>
 
-      <div class="table-scroll">
-        <table class="category-table" aria-label="bluepoint 창업유망 아이템 분야표">
-          <thead>
-            <tr>
-              <th>분야</th>
-              <th>세부 분야</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="category-main">에너지 · 기후</td>
-              <td>
-                <div class="category-subfields">
-                  <div class="category-subfield">재생에너지 발전 · 운영</div>
-                  <div class="category-subfield">에너지저장 · 전력관리</div>
-                  <div class="category-subfield">수소 · 연료전지</div>
-                  <div class="category-subfield">탄소저감 · 자원순환</div>
-                  <div class="category-subfield">기후관측 · 적응 솔루션</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="category-main">AI</td>
-              <td>
-                <div class="category-subfields">
-                  <div class="category-subfield">AI 반도체 · 엣지 AI</div>
-                  <div class="category-subfield">생성형 · 멀티모달 AI</div>
-                  <div class="category-subfield">산업 · 제조 AI</div>
-                  <div class="category-subfield">자율주행 · 로보틱스 AI</div>
-                  <div class="category-subfield">AI 데이터 · 신뢰성 · 보안</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="category-main">양자 · 핵융합</td>
-              <td>
-                <div class="category-subfields">
-                  <div class="category-subfield">양자컴퓨팅 · 제어</div>
-                  <div class="category-subfield">양자센싱 · 정밀계측</div>
-                  <div class="category-subfield">양자통신 · 양자보안</div>
-                  <div class="category-subfield">핵융합 플라즈마 · 운전제어</div>
-                  <div class="category-subfield">핵융합 소재 · 부품 · 에너지시스템</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="category-main">국방 · 우주항공</td>
-              <td>
-                <div class="category-subfields">
-                  <div class="category-subfield">무인 · 자율체계</div>
-                  <div class="category-subfield">감시 · 정찰 · 표적탐지</div>
-                  <div class="category-subfield">국방 통신 · 항법 · 전자전</div>
-                  <div class="category-subfield">우주발사체 · 위성시스템</div>
-                  <div class="category-subfield">우주데이터 · 지상서비스</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="category-main">바이오헬스케어</td>
-              <td>
-                <div class="category-subfields">
-                  <div class="category-subfield">체외진단 · 정밀진단</div>
-                  <div class="category-subfield">디지털헬스 · 의료AI</div>
-                  <div class="category-subfield">신약 · 바이오의약품</div>
-                  <div class="category-subfield">약물전달 · 바이오소재</div>
-                  <div class="category-subfield">의료기기 · 재생의료</div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="category-grid" aria-label="bluepoint 창업유망 아이템 분야표">
+        <section class="category-section">
+          <h3 class="category-main">에너지 · 기후</h3>
+          <div class="category-subfields">
+            <div class="category-subfield">재생에너지 발전 · 운영</div>
+            <div class="category-subfield">에너지저장 · 전력관리</div>
+            <div class="category-subfield">수소 · 연료전지</div>
+            <div class="category-subfield">탄소저감 · 자원순환</div>
+            <div class="category-subfield">기후관측 · 적응 솔루션</div>
+          </div>
+        </section>
+        <section class="category-section">
+          <h3 class="category-main">AI</h3>
+          <div class="category-subfields">
+            <div class="category-subfield">AI 반도체 · 엣지 AI</div>
+            <div class="category-subfield">생성형 · 멀티모달 AI</div>
+            <div class="category-subfield">산업 · 제조 AI</div>
+            <div class="category-subfield">자율주행 · 로보틱스 AI</div>
+            <div class="category-subfield">AI 데이터 · 신뢰성 · 보안</div>
+          </div>
+        </section>
+        <section class="category-section">
+          <h3 class="category-main">양자 · 핵융합</h3>
+          <div class="category-subfields">
+            <div class="category-subfield">양자컴퓨팅 · 제어</div>
+            <div class="category-subfield">양자센싱 · 정밀계측</div>
+            <div class="category-subfield">양자통신 · 양자보안</div>
+            <div class="category-subfield">핵융합 플라즈마 · 운전제어</div>
+            <div class="category-subfield">핵융합 소재 · 부품 · 에너지시스템</div>
+          </div>
+        </section>
+        <section class="category-section">
+          <h3 class="category-main">국방 · 우주항공</h3>
+          <div class="category-subfields">
+            <div class="category-subfield">무인 · 자율체계</div>
+            <div class="category-subfield">감시 · 정찰 · 표적탐지</div>
+            <div class="category-subfield">국방 통신 · 항법 · 전자전</div>
+            <div class="category-subfield">우주발사체 · 위성시스템</div>
+            <div class="category-subfield">우주데이터 · 지상서비스</div>
+          </div>
+        </section>
+        <section class="category-section">
+          <h3 class="category-main">바이오헬스케어</h3>
+          <div class="category-subfields">
+            <div class="category-subfield">체외진단 · 정밀진단</div>
+            <div class="category-subfield">디지털헬스 · 의료AI</div>
+            <div class="category-subfield">신약 · 바이오의약품</div>
+            <div class="category-subfield">약물전달 · 바이오소재</div>
+            <div class="category-subfield">의료기기 · 재생의료</div>
+          </div>
+        </section>
+      </section>
 
       <div class="table-scroll">
         <table aria-label="bluepoint 창업유망 아이템 목록">
