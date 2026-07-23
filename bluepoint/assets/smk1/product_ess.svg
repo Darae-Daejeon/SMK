@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fbfaff"/>
+      <stop offset="1" stop-color="#f2f0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="320" fill="url(#bg)"/>
+  <rect x="74" y="54" width="372" height="210" rx="14" fill="#ffffff" stroke="#dedee5" stroke-width="5"/>
+  <g transform="translate(104 82)">
+    <rect width="74" height="56" rx="8" fill="#7132f5" opacity=".88"/>
+    <rect x="86" width="74" height="56" rx="8" fill="#149e61" opacity=".88"/>
+    <rect x="172" width="74" height="56" rx="8" fill="#7132f5" opacity=".74"/>
+    <rect x="258" width="74" height="56" rx="8" fill="#149e61" opacity=".74"/>
+    <rect y="72" width="74" height="56" rx="8" fill="#149e61" opacity=".74"/>
+    <rect x="86" y="72" width="74" height="56" rx="8" fill="#7132f5" opacity=".74"/>
+    <rect x="172" y="72" width="74" height="56" rx="8" fill="#149e61" opacity=".88"/>
+    <rect x="258" y="72" width="74" height="56" rx="8" fill="#7132f5" opacity=".88"/>
+  </g>
+  <path d="M124 238 H396" stroke="#101114" stroke-width="8" stroke-linecap="round" opacity=".28"/>
+  <circle cx="402" cy="104" r="14" fill="#101114" opacity=".72"/>
+  <circle cx="402" cy="148" r="14" fill="#149e61"/>
+  <text x="260" y="296" text-anchor="middle" font-family="Pretendard, Malgun Gothic, Arial, sans-serif" font-size="24" font-weight="800" fill="#101114">ESS 배터리 모듈</text>
+</svg>
