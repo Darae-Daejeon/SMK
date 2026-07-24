@@ -6,8 +6,8 @@ from pathlib import Path
 HTML_PATH = Path(__file__).parents[1] / "ETRI" / "newsletter" / "da_logo.html"
 
 EXPECTED_LINKS = [
-    "https://forms.gle/5DG5d9RDGpjtquh4A",
-    "https://forms.gle/5DG5d9RDGpjtquh4A",
+    "https://forms.gle/wdT2K3nX5MCzDR4cA",
+    "https://forms.gle/wdT2K3nX5MCzDR4cA",
     "https://daraebiz.com/",
     "https://www.youtube.com/@etri3581",
     "https://itec.etri.re.kr/httx/itec/main/index.do?",
@@ -27,16 +27,17 @@ EXPECTED_LINKS = [
 
 
 class DaLogoHtmlTests(unittest.TestCase):
-    def test_preserves_all_17_links_as_responsive_hotspots(self):
+    def test_preserves_all_17_links_in_the_image_map(self):
         html = HTML_PATH.read_text(encoding="utf-8")
-        anchors = re.findall(r'<a class="hotspot"[^>]+>', html)
-        hrefs = [re.search(r'href="([^"]+)"', anchor).group(1) for anchor in anchors]
+        areas = re.findall(r"<area\b[^>]+>", html, flags=re.DOTALL)
+        hrefs = [re.search(r'href="([^"]+)"', area).group(1) for area in areas]
 
         self.assertEqual(EXPECTED_LINKS, hrefs)
-        self.assertTrue(all('target="_blank"' in anchor for anchor in anchors))
-        self.assertTrue(all('data-coords="' in anchor for anchor in anchors))
-        self.assertIn("left: calc(var(--x) / 800 * 100%);", html)
-        self.assertIn("top: calc(var(--y) / 2137 * 100%);", html)
+        self.assertTrue(all('target="_blank"' in area for area in areas))
+        self.assertTrue(all('coords="' in area for area in areas))
+        self.assertIn('usemap="#newsletter-map"', html)
+        self.assertIn('width="800"', html)
+        self.assertIn('height="2137"', html)
 
 
 if __name__ == "__main__":
