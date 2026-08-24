@@ -184,6 +184,38 @@
         display: inline-block;
       }
 
+      .consult-action {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 28px;
+      }
+
+      .consult-action a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 300px;
+        min-height: 100px;
+        padding: 13px 24px;
+        border-radius: 12px;
+        background: var(--blue);
+        color: var(--white);
+        font-size: 32px;
+        font-weight: 900;
+        white-space: nowrap;
+        transition: background-color 160ms ease;
+      }
+
+      .consult-action a:hover,
+      .consult-action a:focus-visible {
+        background: #054a86;
+      }
+
+      .consult-action a:focus-visible {
+        outline: 3px solid rgba(7, 92, 168, 0.28);
+        outline-offset: 3px;
+      }
+
       @media (max-width: 760px) {
         .wrap {
           width: min(100% - 16px, 1280px);
@@ -201,6 +233,12 @@
           position: sticky;
           left: 20px;
         }
+
+        .consult-action a {
+          min-width: min(300px, 100%);
+          min-height: 72px;
+          font-size: 25px;
+        }
       }
     </style>
   </head>
@@ -212,7 +250,14 @@
       </div>
     </header>
 
+
+
     <main class="wrap">
+      <div class="consult-action">
+      <a href="https://moaform.com/q/mumsdF" target="_blank" rel="noopener noreferrer">상담 신청하기</a>
+        </div>
+
+
       <div class="section-title">
         <h2>기술 목록</h2>
         <span class="count">총 4건</span>
