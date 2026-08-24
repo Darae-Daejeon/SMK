@@ -101,6 +101,23 @@
         min-width: 1040px;
         border-collapse: collapse;
         border-top: 2px solid var(--ink);
+        table-layout: fixed;
+      }
+
+      .col-no {
+        width: 4%;
+      }
+
+      .col-title {
+        width: 58%;
+      }
+
+      .col-field {
+        width: 27%;
+      }
+
+      .col-open {
+        width: 11%;
       }
 
       th,
@@ -134,21 +151,18 @@
       }
 
       .title {
-        min-width: 560px;
         color: var(--ink);
         font-size: 16px;
         font-weight: 800;
       }
 
       .field {
-        width: 170px;
         color: var(--muted);
         font-weight: 700;
         text-align: center;
       }
 
       .open {
-        width: 120px;
         text-align: right;
       }
 
@@ -180,7 +194,7 @@
       .consult-action {
         display: flex;
         justify-content: center;
-        margin-bottom: 28px;
+        margin-top: 28px;
       }
 
       .consult-action a {
@@ -188,7 +202,7 @@
         align-items: center;
         justify-content: center;
         min-width: 300px;
-        min-height: 100px;
+        height: 70px;
         padding: 13px 24px;
         border-radius: 12px;
         background: var(--blue);
@@ -229,7 +243,7 @@
 
         .consult-action a {
           min-width: min(300px, 100%);
-          min-height: 72px;
+          height: 50px;
           font-size: 25px;
         }
       }
@@ -246,11 +260,6 @@
 
 
     <main class="wrap">
-      <div class="consult-action">
-      <a href="https://forms.gle/BdbG99UrdV5xpVdA6" target="_blank" rel="noopener noreferrer">상담 신청하기</a>
-        </div>
-
-
       <div class="section-title">
         <h2>기술 목록</h2>
         <span class="count">총 4건</span>
@@ -258,6 +267,12 @@
 
       <div class="table-scroll">
         <table aria-label="ETRI SMK 기술목록">
+          <colgroup>
+            <col class="col-no">
+            <col class="col-title">
+            <col class="col-field">
+            <col class="col-open">
+          </colgroup>
           <thead>
             <tr>
               <th>번호</th>
@@ -293,6 +308,10 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="consult-action">
+        <a href="https://forms.gle/BdbG99UrdV5xpVdA6" target="_blank" rel="noopener noreferrer">상담 신청하기</a>
       </div>
     </main>
 
